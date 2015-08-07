@@ -39,7 +39,6 @@ public class PhotoFragment extends Fragment {
     MyLine m_line;
     Bitmap m_bitmap = null;
     float kDeltaTextDis = 75f;
-
     // UI Views
 //    ImageButton m_pencilBtn;
 //    ImageButton m_rulerBtn;
