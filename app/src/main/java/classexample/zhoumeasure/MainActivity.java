@@ -1,18 +1,26 @@
 package classexample.zhoumeasure;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import classexample.zhoumeasure.photo.PhotoFragment;
+
 
 public class MainActivity extends Activity {
-
+    PhotoFragment mPhotoFragment;
+    FragmentTransaction mTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mPhotoFragment = new PhotoFragment();
+        mTransaction = getFragmentManager().beginTransaction();
+        mTransaction.add(R.id.mainContainer, mPhotoFragment).commit();
+
     }
 
     @Override

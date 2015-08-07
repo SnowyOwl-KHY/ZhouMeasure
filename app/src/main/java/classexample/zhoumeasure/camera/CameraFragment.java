@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 public class CameraFragment extends Fragment{
     View rootView;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
