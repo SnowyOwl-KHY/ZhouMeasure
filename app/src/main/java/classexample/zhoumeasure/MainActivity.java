@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
 
 
 
-        mTransaction.add(R.id.mainContainer, mAddReferenceFragment).commit();
+        mTransaction.add(R.id.mainContainer, mPhotoFragment).commit();
 
     }
 

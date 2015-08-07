@@ -114,4 +114,6 @@ public class AddReferenceFragment extends Fragment {
         widthAnimation.start();
     }
 
+
+
 }
