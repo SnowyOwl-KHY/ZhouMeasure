@@ -61,8 +61,6 @@ public class PhotoFragment extends Fragment {
         findViews();
 
         // set background
-        mBlankCameraBtn = (ImageView) m_rootView.findViewById(R.id.blankCameraBtn);
-        mBlankReturnBtn = (ImageView) m_rootView.findViewById(R.id.blankReturnBtn);
         m_drawArea = (RelativeLayout) m_rootView.findViewById(R.id.drawArea);
         if (m_bitmap != null) {
             Drawable m_tempDr = new BitmapDrawable(m_bitmap);
@@ -91,7 +89,7 @@ public class PhotoFragment extends Fragment {
         mCalcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("zxz","onClickRuler");
+                Log.d("zxz", "onClickRuler");
             }
         });
         setResult();
@@ -103,7 +101,9 @@ public class PhotoFragment extends Fragment {
     public void onStart() {
         super.onStart();
     }
-
+    public void getCameraPosX(int []ans){
+        mBlankCameraBtn.getLocationInWindow(ans);
+    }
     public void setResult(){
 
         //first Angle
@@ -150,6 +150,8 @@ public class PhotoFragment extends Fragment {
         m_tarLenView = (TextView) m_rootView.findViewById(R.id.tarLen);
         mRulerBtn = (ImageView) m_rootView.findViewById(R.id.btnRuler);
         mCalcBtn = (ImageView) m_rootView.findViewById(R.id.btnCalc);
+        mBlankCameraBtn = (ImageView) m_rootView.findViewById(R.id.blankCameraBtn);
+        mBlankReturnBtn = (ImageView) m_rootView.findViewById(R.id.blankReturnBtn);
     }
 
 }

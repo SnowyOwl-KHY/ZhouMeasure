@@ -272,8 +272,8 @@ public class ReferenceFragment extends Fragment {
             float barGap = mReferenceLayout.getHeight();
             float bottomGap = mSvContentList.getHeight();
 
-            final int Y_DIFF = 120;
-            final int X_DIFF = 20;
+            final int Y_DIFF = 168;
+            final int X_DIFF = 72;
 
             switch (view.getId()) {
                 case R.id.ivCameraImage:
@@ -305,6 +305,10 @@ public class ReferenceFragment extends Fragment {
                                 Utils.moveTo(view,
                                         getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 2 + X_DIFF,
                                         getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - Y_DIFF);
+//                                int[] cameraPos = new int[2];
+//                                ((MainActivity)getActivity()).getPhotoFragment().getCameraPosX(cameraPos);
+//                                Utils.moveTo(view, cameraPos[0], cameraPos[1]);
+
                                 break;
                             case R.layout.fragment_photo:
                                 attachedFragment = R.layout.fragment_camera;
