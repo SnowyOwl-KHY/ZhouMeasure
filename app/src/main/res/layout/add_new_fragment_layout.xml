@@ -23,7 +23,7 @@
         android:layout_height="50dp"
         android:id="@+id/fingerIcon"
         android:src="@drawable/fingerprint_128"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="30dp"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/imageView2"
         android:layout_alignStart="@+id/imageView2"/>
@@ -33,7 +33,7 @@
         android:layout_height="50dp"
         android:id="@+id/imageView"
         android:src="@drawable/document2_128"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/fingerIcon"
         android:layout_alignLeft="@+id/fingerIcon"
         android:layout_alignStart="@+id/fingerIcon"/>
@@ -52,12 +52,10 @@
         android:layout_height="50dp"
         android:id="@+id/imageView2"
         android:src="@drawable/rulers_128"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="45dp"
         android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp"/>
+        android:layout_alignLeft="@+id/submitAdd"
+        android:layout_alignStart="@+id/submitAdd"
+        android:layout_marginTop="30dp"/>
 
     <EditText
         android:layout_width="220dp"
@@ -71,18 +69,29 @@
 
     <com.dd.CircularProgressButton
         android:id="@+id/submitAdd"
-        android:layout_width="196dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:cpb_textComplete="Complete"
         app:cpb_textError="I Know"
         app:cpb_textIdle="Submit"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="100dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/lengthInput"
-        android:layout_alignEnd="@+id/lengthInput"/>
+        android:layout_centerHorizontal="true"/>
 
+    <com.dd.CircularProgressButton
+        android:id="@+id/backBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cpb_textComplete="Back"
+        app:cpb_textError="I Know"
+        app:cpb_textIdle="Back"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
     <com.romainpiel.shimmer.ShimmerTextView
         android:id="@+id/infoText"
         android:text="Please Input Name and Length"
@@ -91,7 +100,7 @@
         android:textColor="#444"
         android:textSize="18dp"
 
+        android:layout_marginBottom="40dp"
         android:layout_above="@+id/submitAdd"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="71dp"/>
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
