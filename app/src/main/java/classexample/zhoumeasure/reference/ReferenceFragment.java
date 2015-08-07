@@ -270,8 +270,8 @@ public class ReferenceFragment extends Fragment {
             float barGap = mReferenceLayout.getHeight();
             float bottomGap = mSvContentList.getHeight();
 
-            final int Y_DIFF = 168;
-            final int X_DIFF = 72;
+            final int Y_DIFF = 15;
+            final int X_DIFF = (getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 4 - mIvCameraImage.getWidth()) / 2;
 
             switch (view.getId()) {
                 case R.id.ivCameraImage:
@@ -284,7 +284,7 @@ public class ReferenceFragment extends Fragment {
                             case R.layout.fragment_photo:
                                 Utils.moveTo(view,
                                         getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 2 + X_DIFF,
-                                        getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - Y_DIFF);
+                                        getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - mIvCameraImage.getHeight() - Y_DIFF);
                                 break;
                         }
                         Utils.slideUp(mReferenceLayout, barGap);
@@ -292,7 +292,7 @@ public class ReferenceFragment extends Fragment {
                         Utils.changeAlpha(mIvBackImage, APPEAR_ALPHA);
                         Utils.moveTo(mIvAddReference, mIvAddReference.getX(), mIvAddReference.getY() - mIvAddReference.getHeight() - barGap);
                         mIvBackImage.setX(getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 4 * 3 + X_DIFF);
-                        mIvBackImage.setY(getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - Y_DIFF);
+                        mIvBackImage.setY(getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - mIvBackImage.getHeight() - Y_DIFF);
                         ((MainActivity) getActivity()).getPhotoFragment().setRefLength(mSelectedLength);
                     } else {
                         switch (attachedFragment) {
@@ -302,7 +302,7 @@ public class ReferenceFragment extends Fragment {
                                 ((MainActivity) getActivity()).jumpToPhotoFragment();
                                 Utils.moveTo(view,
                                         getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 2 + X_DIFF,
-                                        getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - Y_DIFF);
+                                        getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - mIvCameraImage.getHeight() - Y_DIFF);
                                 break;
                             case R.layout.fragment_photo:
                                 attachedFragment = R.layout.fragment_camera;
