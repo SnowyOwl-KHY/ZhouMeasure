@@ -82,7 +82,7 @@
         android:layout_below="@+id/referenceLayout"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="-35dp"
-        android:src="@drawable/cameraa" />
+        android:src="@drawable/camera" />
 
     <ImageView
         android:id="@+id/ivAddImage"
