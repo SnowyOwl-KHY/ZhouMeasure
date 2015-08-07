@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,10 +40,10 @@ public class PhotoFragment extends Fragment {
     MyLine m_line;
     Bitmap m_bitmap = null;
     float kDeltaTextDis = 75f;
-
     // UI Views
-//    ImageButton m_pencilBtn;
-//    ImageButton m_rulerBtn;
+    ImageView mCalcBtn;
+    ImageView mRulerBtn;
+
     RelativeLayout m_drawArea;
 
     public static PhotoFragment instance = null;
@@ -129,8 +130,8 @@ public class PhotoFragment extends Fragment {
     private void findViews() {
         m_refLenView = (TextView) m_rootView.findViewById(R.id.refLen);
         m_tarLenView = (TextView) m_rootView.findViewById(R.id.tarLen);
-//        m_pencilBtn = (ImageButton)m_rootView.findViewById(R.id.pencilBtn);
-//        m_rulerBtn = (ImageButton)m_rootView.findViewById(R.id.rulerBtn);
+        mRulerBtn = (ImageView) m_rootView.findViewById(R.id.btnRuler);
+        mCalcBtn = (ImageView) m_rootView.findViewById(R.id.btnCalc);
     }
 
 }
