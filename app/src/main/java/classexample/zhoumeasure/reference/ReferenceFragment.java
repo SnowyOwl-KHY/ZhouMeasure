@@ -23,6 +23,7 @@ import java.util.HashMap;
 
 import classexample.zhoumeasure.MainActivity;
 import classexample.zhoumeasure.R;
+import classexample.zhoumeasure.photo.PhotoFragment;
 
 /**
  * Created by Xiaozhou on 2015/8/7.
@@ -45,7 +46,7 @@ public class ReferenceFragment extends Fragment {
     private Button mBtnPositionAtPhoto;
 
     private ImageView mIvCameraImage;
-    private ImageView mIvBackImage;
+    public ImageView mIvBackImage;
 
     private ImageView mIvAddReference;
 
@@ -271,6 +272,9 @@ public class ReferenceFragment extends Fragment {
             float barGap = mReferenceLayout.getHeight();
             float bottomGap = mSvContentList.getHeight();
 
+            final int Y_DIFF = 120;
+            final int X_DIFF = 20;
+
             switch (view.getId()) {
                 case R.id.ivCameraImage:
                     if (fragmentIsVisible) {
@@ -280,21 +284,27 @@ public class ReferenceFragment extends Fragment {
                                 Utils.moveTo(view, mBtnPositionAtCamera.getX(), mBtnPositionAtCamera.getY());
                                 break;
                             case R.layout.fragment_photo:
-                                Utils.moveTo(view, mBtnPositionAtPhoto.getX(), mBtnPositionAtPhoto.getY());
+                                Utils.moveTo(view,
+                                        getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 2 + X_DIFF,
+                                        getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - Y_DIFF);
                                 break;
                         }
                         Utils.slideUp(mReferenceLayout, barGap);
                         Utils.slideUp(mSvContentList, -bottomGap);
                         Utils.changeAlpha(mIvBackImage, APPEAR_ALPHA);
                         Utils.moveTo(mIvAddReference, mIvAddReference.getX(), mIvAddReference.getY() - mIvAddReference.getHeight() - barGap);
+                        mIvBackImage.setX(getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 4 * 3 + X_DIFF);
+                        mIvBackImage.setY(getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - Y_DIFF);
                         ((MainActivity) getActivity()).getPhotoFragment().setRefLength(mSelectedLength);
                     } else {
                         switch (attachedFragment) {
                             case R.layout.fragment_camera:
                                 attachedFragment = R.layout.fragment_photo;
-                                Utils.moveTo(view, mBtnPositionAtPhoto.getX(), mBtnPositionAtPhoto.getY());
                                 ((MainActivity) getActivity()).getCameraFragment().takePhoto();
                                 ((MainActivity) getActivity()).jumpToPhotoFragment();
+                                Utils.moveTo(view,
+                                        getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 2 + X_DIFF,
+                                        getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - Y_DIFF);
                                 break;
                             case R.layout.fragment_photo:
                                 attachedFragment = R.layout.fragment_camera;

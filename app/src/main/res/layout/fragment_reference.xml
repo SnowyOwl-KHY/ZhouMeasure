@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/referenceFragment">
+    android:id="@+id/referenceFragmentLayout">
 
     <RelativeLayout
         android:id="@+id/cameraContainer"
@@ -85,13 +85,13 @@
 
     <ImageView
         android:id="@+id/ivCameraImage"
-        android:layout_width="@dimen/big_circle_size"
-        android:layout_height="@dimen/big_circle_size"
+        android:layout_width="@dimen/circle_size"
+        android:layout_height="@dimen/circle_size"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/referenceLayout"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="-35dp"
+        android:layout_marginTop="-28dp"
         android:src="@drawable/camera" />
 
     <ImageView
@@ -102,7 +102,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/referenceLayout"
         android:layout_marginRight="90dp"
-        android:layout_marginTop="-20dp"
+        android:layout_marginTop="-18dp"
         android:src="@drawable/add" />
 
     <ImageView

@@ -46,6 +46,9 @@ public class PhotoFragment extends Fragment {
 
     RelativeLayout m_drawArea;
 
+    private ImageView mBlankCameraBtn;
+    private ImageView mBlankReturnBtn;
+
     public static PhotoFragment instance = null;
 
     @Nullable
@@ -58,6 +61,8 @@ public class PhotoFragment extends Fragment {
         findViews();
 
         // set background
+        mBlankCameraBtn = (ImageView) m_rootView.findViewById(R.id.blankCameraBtn);
+        mBlankReturnBtn = (ImageView) m_rootView.findViewById(R.id.blankReturnBtn);
         m_drawArea = (RelativeLayout) m_rootView.findViewById(R.id.drawArea);
         if (m_bitmap != null) {
             Drawable m_tempDr = new BitmapDrawable(m_bitmap);

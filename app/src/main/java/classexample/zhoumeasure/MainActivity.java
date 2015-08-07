@@ -45,6 +45,9 @@ public class MainActivity extends Activity {
     protected void onStart() {
         super.onStart();
         addReferenceFragment.setPosition(0, -5000);
+//        referenceFragment.mBtnPositionAtPhoto = photoFragment.mBlankCameraBtn;
+//        referenceFragment.mIvBackImage.setX(photoFragment.mBlankReturnBtn.getX());
+//        referenceFragment.mIvBackImage.setY(photoFragment.mBlankReturnBtn.getY());
     }
 
     @Override
