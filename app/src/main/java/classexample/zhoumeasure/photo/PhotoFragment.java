@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -84,14 +85,24 @@ public class PhotoFragment extends Fragment {
     }
 
     public void setResult(){
+        double angle = Math.atan2(m_line.m_anchor[0].m_y - m_line.m_anchor[1].m_y, m_line.m_anchor[0].m_x - m_line.m_anchor[1].m_x);
+        angle = (angle*180/Math.PI);
+
         m_tarLength = m_line.calPropotion() * m_refLength;
         m_refLenView.setText("Ref: " + m_refLength + "cm");
-        m_refLenView.setX(Math.abs(m_line.m_anchor[0].m_x + m_line.m_anchor[1].m_x) / 2 - m_refLenView.getWidth() / 2);
-        m_refLenView.setY(Math.abs(m_line.m_anchor[0].m_y + m_line.m_anchor[1].m_y) / 2 - m_tarLenView.getHeight());
+
+//        float deltaX = (float) Math.abs(Math.sin(angle) * (float) m_tarLenView.getHeight() / 2);
+//        float deltaY = (float) Math.abs(Math.cos(angle) * (float) m_tarLenView.getHeight() / 2);
+
+        m_refLenView.setX((m_line.m_anchor[0].m_x + m_line.m_anchor[1].m_x) / 2 - m_refLenView.getWidth() / 2 );
+        m_refLenView.setY((m_line.m_anchor[0].m_y + m_line.m_anchor[1].m_y) / 2 - m_tarLenView.getHeight() / 2 );
+
+        m_refLenView.setRotation(180 + (float) angle);
+
         DecimalFormat format = new DecimalFormat("#.0");
         m_tarLenView.setText("Tar: " + format.format(m_tarLength) + "cm");
         m_tarLenView.setX(Math.abs(m_line.m_anchor[2].m_x + m_line.m_anchor[3].m_x) / 2 - m_tarLenView.getWidth() / 2);
-        m_tarLenView.setY(Math.abs(m_line.m_anchor[2].m_y + m_line.m_anchor[3].m_y) / 2 - m_tarLenView.getHeight());
+        m_tarLenView.setY(Math.abs(m_line.m_anchor[2].m_y + m_line.m_anchor[3].m_y) / 2 - m_tarLenView.getHeight() / 2);
     }
 
     public void setBitmap(Bitmap inBitmap) {
