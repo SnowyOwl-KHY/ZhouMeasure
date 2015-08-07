@@ -2,6 +2,7 @@ package classexample.zhoumeasure.reference;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -36,6 +37,8 @@ public class ReferenceFragment extends Fragment {
 
     private static final float APPEAR_ALPHA = 1.0f;
     private static final float DISAPPEAR_ALPHA = 0.0f;
+    private static final String DATA_KEY = "referenceObjectListDataKey";
+    private static final String SEPARATOR = "@@";
 
     private Button mBtnStartButton;
     private Button mBtnEndButton;
@@ -48,6 +51,8 @@ public class ReferenceFragment extends Fragment {
     private ScrollView mSvContentList;
 
     private double mSelectedLength = 0;
+
+    private ReferenceListAdapter mReferenceListAdapter;
 
     @Override
     public void onStart() {
@@ -87,15 +92,11 @@ public class ReferenceFragment extends Fragment {
 
         TextView tvName = (TextView) newDetail.findViewById(R.id.tvReferenceName);
         TextView tvLength = (TextView) newDetail.findViewById(R.id.tvReferenceSize);
-        TextView tvDate = (TextView) newDetail.findViewById(R.id.tvReferenceDate);
         TextView tvDescription = (TextView) newDetail.findViewById(R.id.tvReferenceDescription);
-//        ImageView ivImage = (ImageView) newDetail.findViewById(R.id.ivReferenceImage);
 
         tvName.setText("name");
         tvLength.setText("Length:\t\t" + " cm");
-        tvDate.setText("Date: ");
         tvDescription.setText("This is a description about the one whose length is known.");
-//        ivImage.setImageResource(R.drawable.camera_icon);
     }
 
     private void simplyInitialListView() {
@@ -107,7 +108,8 @@ public class ReferenceFragment extends Fragment {
             listData.add(map);
         }
 
-        mLvReference.setAdapter(new ReferenceListAdapter());
+        mReferenceListAdapter = new ReferenceListAdapter();
+        mLvReference.setAdapter(mReferenceListAdapter);
         mLvReference.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -127,16 +129,13 @@ public class ReferenceFragment extends Fragment {
 
                 TextView tvName = (TextView) newDetail.findViewById(R.id.tvReferenceName);
                 TextView tvLength = (TextView) newDetail.findViewById(R.id.tvReferenceSize);
-                TextView tvDate = (TextView) newDetail.findViewById(R.id.tvReferenceDate);
                 TextView tvDescription = (TextView) newDetail.findViewById(R.id.tvReferenceDescription);
                 ImageView ivImage = (ImageView) newDetail.findViewById(R.id.ivReferenceImage);
-
-                tvName.setText(objects[position].name);
-                tvLength.setText("Length:\t\t" + objects[position].length + " cm");
-                tvDate.setText("Date: " + objects[position].date);
-                tvDescription.setText(objects[position].description);
-                ivImage.setImageResource(objects[position].imageSrcId);
-                mSelectedLength = objects[position].length;
+                tvName.setText(mReferenceListAdapter.objects.get(position).name);
+                tvLength.setText("Length:\t\t" + mReferenceListAdapter.objects.get(position).length + " cm");
+                tvDescription.setText(mReferenceListAdapter.objects.get(position).description);
+                ivImage.setImageResource(R.drawable.ruler);
+                mSelectedLength = mReferenceListAdapter.objects.get(position).length;
 
                 newDetail.animate().setInterpolator(new AccelerateDecelerateInterpolator())
                         .x(oldDetail.getX()).y(oldDetail.getY()).setDuration(Utils.ANIMATION_TIME);
@@ -146,28 +145,48 @@ public class ReferenceFragment extends Fragment {
         });
     }
 
-    static ReferenceObject[] objects = new ReferenceObject[7];
-    static String[] names = {"ruler", "finger", "hand", "phone", "laptop", "pad", "pen"};
-    static float[] lengths = {20.0f, 8.0f, 15.0f, 12.0f, 25.0f, 18.0f, 15.0f};
-    static int[] imageId = {R.drawable.ruler, R.drawable.finger, R.drawable.hand, R.drawable.phone, R.drawable.laptop,
-            R.drawable.pad, R.drawable.pen};
-
-    static {
-        for (int i = 0; i < objects.length; i++) {
-            objects[i] = new ReferenceObject(names[i], lengths[i], "2015-08-0" + (i + 1),
-                    "This is a description about the one whose length is known.", imageId[i]);
+    public void addReferenceObject(ReferenceObject referenceObject) {
+        SharedPreferences sp = getActivity().getSharedPreferences("SP", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        String strObjects = sp.getString(DATA_KEY, null);
+        if (strObjects != null) {
+            strObjects += SEPARATOR;
+        } else {
+            strObjects = "";
         }
+        strObjects += referenceObject.toString();
+        editor.putString(DATA_KEY, strObjects);
+        editor.commit();
+        mReferenceListAdapter.update();
     }
 
     class ReferenceListAdapter extends BaseAdapter {
 
-        View[] itemViews;
+        ArrayList<View> itemViews;
+        ArrayList<ReferenceObject> objects = new ArrayList<>();
 
         public ReferenceListAdapter() {
-            itemViews = new View[objects.length];
-            for (int i = 0; i < itemViews.length; i++) {
-                itemViews[i] = makeView(objects[i]);
+            itemViews = new ArrayList();
+            update();
+        }
+
+        public void update() {
+            objects.clear();
+            itemViews.clear();
+            SharedPreferences sp = ReferenceFragment.this.getActivity().getSharedPreferences("SP", Context.MODE_PRIVATE);
+            String temp = sp.getString(DATA_KEY, null);
+            if (temp != null && !temp.equals("")) {
+                String[] strObjects = temp.split(SEPARATOR);
+                for (String strObject : strObjects) {
+                    addReferenceObject(new ReferenceObject(strObject));
+                }
             }
+        }
+
+        public void addReferenceObject(ReferenceObject referenceObject) {
+            objects.add(referenceObject);
+            itemViews.add(makeView(referenceObject));
+            notifyDataSetChanged();
         }
 
         private View makeView(ReferenceObject object) {
@@ -180,18 +199,18 @@ public class ReferenceFragment extends Fragment {
             TextView tvLength = (TextView) itemView.findViewById(R.id.tvReferenceSize);
             tvLength.setText("Length:\t\t" + object.length + " cm");
             ImageView ivImage = (ImageView) itemView.findViewById(R.id.ivReferenceImage);
-            ivImage.setImageResource(object.imageSrcId);
+            ivImage.setImageResource(R.drawable.ruler);
             return itemView;
         }
 
         @Override
         public int getCount() {
-            return itemViews.length;
+            return itemViews.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return itemViews[position];
+            return itemViews.get(position);
         }
 
         @Override
@@ -201,26 +220,31 @@ public class ReferenceFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView != null) {
-                return convertView;
-            }
-            return itemViews[position];
+            return itemViews.get(position);
         }
     }
 
     static class ReferenceObject {
         String name;
         float length;
-        String date;
         String description;
-        int imageSrcId;
 
-        public ReferenceObject(String name, float length, String date, String description, int imageSrcId) {
+        public ReferenceObject(String name, float length, String description) {
             this.name = name;
             this.length = length;
-            this.date = date;
             this.description = description;
-            this.imageSrcId = imageSrcId;
+        }
+
+        public ReferenceObject(String string) {
+            String[] temp = string.split(",");
+            this.name = temp[0];
+            this.length = Float.valueOf(temp[1]);
+            this.description = temp[2];
+        }
+
+        @Override
+        public String toString() {
+            return name + "," + length + "," + description;
         }
     }
 
@@ -266,7 +290,6 @@ public class ReferenceFragment extends Fragment {
                     Utils.slideDown(mSvContentList);
                     Utils.changeAlpha(mIvBackImage, DISAPPEAR_ALPHA);
                     break;
-
             }
         }
     };
