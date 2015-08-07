@@ -106,10 +106,9 @@ public class MyLine extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.d("zxz", " lineredraw");
-        m_paint.setARGB(255, 255, 0, 0);
+        m_paint.setARGB(180, 160, 191, 124);
         canvas.drawLine(m_anchor[0].getX(), m_anchor[0].getY(), m_anchor[1].getX(), m_anchor[1].getY(), m_paint);
-        m_paint.setARGB(255, 0, 0, 255);
+        m_paint.setARGB(180, 2, 143, 245);
         canvas.drawLine(m_anchor[2].getX(), m_anchor[2].getY(), m_anchor[3].getX(), m_anchor[3].getY(), m_paint);
     }
 
