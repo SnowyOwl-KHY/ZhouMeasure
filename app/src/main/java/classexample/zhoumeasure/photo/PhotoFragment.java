@@ -24,7 +24,6 @@ public class PhotoFragment extends Fragment{
         rootView = inflater.inflate(R.layout.photo_layout, container, false);
         ProgressWheel wheel = new ProgressWheel(container.getContext());
         wheel.setBarColor(Color.BLUE);
-
         container.addView(wheel);
         return rootView;
     }
