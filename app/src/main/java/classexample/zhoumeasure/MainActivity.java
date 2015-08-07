@@ -7,19 +7,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import classexample.zhoumeasure.photo.PhotoFragment;
+import classexample.zhoumeasure.reference.AddReferenceFragment;
 
 
 public class MainActivity extends Activity {
     PhotoFragment mPhotoFragment;
+    AddReferenceFragment mAddReferenceFragment;
     FragmentTransaction mTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPhotoFragment = new PhotoFragment();
         mTransaction = getFragmentManager().beginTransaction();
-        mTransaction.add(R.id.mainContainer, mPhotoFragment).commit();
+
+        //new objects
+        mPhotoFragment = new PhotoFragment();
+        mAddReferenceFragment = new AddReferenceFragment();
+
+
+
+        mTransaction.add(R.id.mainContainer, mAddReferenceFragment).commit();
 
     }
 
