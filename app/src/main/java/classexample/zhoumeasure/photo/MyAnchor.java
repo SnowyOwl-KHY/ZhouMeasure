@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+
 /**
  * Created by Xiaozhou on 2015/8/6.
  */
@@ -21,7 +22,7 @@ public class MyAnchor extends View {
     Paint m_paint = new Paint();
     float m_radius = 20f, m_x, m_y;
     boolean m_isDown = false;
-
+    final float kRadiusDiv = 0.5f;
     public MyAnchor(Context context) {
         super(context);
         m_paint.setARGB(255, 0, 150, 180);
@@ -51,10 +52,10 @@ public class MyAnchor extends View {
     }
 
     public boolean onThisArea(float x, float y){
-        if(     (x < (m_x + m_radius/1.414)) &&
-                (x > (m_x - m_radius/1.414)) &&
-                (y < (m_y + m_radius/1.414)) &&
-                (y > (m_y - m_radius/1.414))  )
+        if(     (x < (m_x + m_radius/kRadiusDiv)) &&
+                (x > (m_x - m_radius/kRadiusDiv)) &&
+                (y < (m_y + m_radius/kRadiusDiv)) &&
+                (y > (m_y - m_radius/kRadiusDiv))  )
             return true;
         else
             return false;
@@ -62,7 +63,6 @@ public class MyAnchor extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
         super.onDraw(canvas);
         Log.d("zxz", " anchorRedraw");
         canvas.drawCircle(m_x,m_y,m_radius,m_paint);

@@ -38,6 +38,7 @@ public class PhotoFragment extends Fragment {
     TextView m_refLenView, m_tarLenView;
     MyLine m_line;
     Bitmap m_bitmap = null;
+    float kDeltaTextDis = 75f;
 
     // UI Views
 //    ImageButton m_pencilBtn;
@@ -85,24 +86,35 @@ public class PhotoFragment extends Fragment {
     }
 
     public void setResult(){
-        double angle = Math.atan2(m_line.m_anchor[0].m_y - m_line.m_anchor[1].m_y, m_line.m_anchor[0].m_x - m_line.m_anchor[1].m_x);
-        angle = (angle*180/Math.PI);
 
+        //first Angle
+        double angle = Math.atan2(m_line.m_anchor[0].m_y - m_line.m_anchor[1].m_y, m_line.m_anchor[0].m_x - m_line.m_anchor[1].m_x);
+        if(angle < 0)
+            angle+=Math.PI;
         m_tarLength = m_line.calPropotion() * m_refLength;
         m_refLenView.setText("Ref: " + m_refLength + "cm");
+        float tx1 = (m_line.m_anchor[0].m_x + m_line.m_anchor[1].m_x) / 2 - ((float)Math.sin(angle))*kDeltaTextDis;
+        float ty1 = (m_line.m_anchor[0].m_y + m_line.m_anchor[1].m_y) / 2 + ((float)Math.cos(angle))*kDeltaTextDis;
+        m_refLenView.setX(tx1 - m_refLenView.getWidth() / 2);
+        m_refLenView.setY(ty1 - m_tarLenView.getHeight() / 2);
+        Log.d("zxz", "angle:" + (float) (angle * 180 / Math.PI));
+        if(angle > Math.PI / 2)
+            angle -= Math.PI;
+        m_refLenView.setRotation((float)(angle*180/Math.PI));
 
-//        float deltaX = (float) Math.abs(Math.sin(angle) * (float) m_tarLenView.getHeight() / 2);
-//        float deltaY = (float) Math.abs(Math.cos(angle) * (float) m_tarLenView.getHeight() / 2);
-
-        m_refLenView.setX((m_line.m_anchor[0].m_x + m_line.m_anchor[1].m_x) / 2 - m_refLenView.getWidth() / 2 );
-        m_refLenView.setY((m_line.m_anchor[0].m_y + m_line.m_anchor[1].m_y) / 2 - m_tarLenView.getHeight() / 2 );
-
-        m_refLenView.setRotation(180 + (float) angle);
-
+        //second Angle
+        angle  = Math.atan2(m_line.m_anchor[2].m_y - m_line.m_anchor[3].m_y, m_line.m_anchor[2].m_x - m_line.m_anchor[3].m_x);
+        if(angle < 0)
+            angle+=Math.PI;
+        float tx2 =(m_line.m_anchor[2].m_x + m_line.m_anchor[3].m_x) / 2- ((float)Math.sin(angle))*kDeltaTextDis;
+        float ty2 =(m_line.m_anchor[2].m_y + m_line.m_anchor[3].m_y) / 2+ ((float)Math.cos(angle))*kDeltaTextDis;
         DecimalFormat format = new DecimalFormat("#.0");
         m_tarLenView.setText("Tar: " + format.format(m_tarLength) + "cm");
-        m_tarLenView.setX(Math.abs(m_line.m_anchor[2].m_x + m_line.m_anchor[3].m_x) / 2 - m_tarLenView.getWidth() / 2);
-        m_tarLenView.setY(Math.abs(m_line.m_anchor[2].m_y + m_line.m_anchor[3].m_y) / 2 - m_tarLenView.getHeight() / 2);
+        m_tarLenView.setX(tx2 - m_tarLenView.getWidth() / 2);
+        m_tarLenView.setY(ty2 - m_tarLenView.getHeight() / 2);
+        if(angle > Math.PI / 2)
+            angle -= Math.PI;
+        m_tarLenView.setRotation((float) (angle * 180 / Math.PI));
     }
 
     public void setBitmap(Bitmap inBitmap) {
