@@ -40,8 +40,9 @@ public class ReferenceFragment extends Fragment {
     private static final String DATA_KEY = "referenceObjectListDataKey";
     private static final String SEPARATOR = "@@";
 
-    private Button mBtnStartButton;
-    private Button mBtnEndButton;
+    private Button mBtnPositionAtReference;
+    private Button mBtnPositionAtCamera;
+    private Button mBtnPositionAtPhoto;
 
     private ImageView mIvCameraImage;
     private ImageView mIvBackImage;
@@ -64,8 +65,9 @@ public class ReferenceFragment extends Fragment {
 
     private void initialUIElement() {
 
-        mBtnStartButton = (Button) getActivity().findViewById(R.id.btnCameraStartPosition);
-        mBtnEndButton = (Button) getActivity().findViewById(R.id.btnCameraEndPosition);
+        mBtnPositionAtReference = (Button) getActivity().findViewById(R.id.btnCameraPositionAtReferenceFragment);
+        mBtnPositionAtCamera = (Button) getActivity().findViewById(R.id.btnCameraPositionAtCameraFragment);
+        mBtnPositionAtPhoto = (Button) getActivity().findViewById(R.id.btnCameraPositionAtPhotoFragment);
 
         mIvCameraImage = (ImageView) getActivity().findViewById(R.id.ivCameraImage);
         mIvCameraImage.setOnClickListener(onClickListener);
@@ -273,7 +275,14 @@ public class ReferenceFragment extends Fragment {
                 case R.id.ivCameraImage:
                     if (fragmentIsVisible) {
                         fragmentIsVisible = false;
-                        Utils.moveTo(view, mBtnEndButton.getX(), mBtnEndButton.getY());
+                        switch (attachedFragment) {
+                            case R.layout.fragment_camera:
+                                Utils.moveTo(view, mBtnPositionAtCamera.getX(), mBtnPositionAtCamera.getY());
+                                break;
+                            case R.layout.fragment_photo:
+                                Utils.moveTo(view, mBtnPositionAtPhoto.getX(), mBtnPositionAtPhoto.getY());
+                                break;
+                        }
                         Utils.slideUp(mReferenceLayout, barGap);
                         Utils.slideUp(mSvContentList, -bottomGap);
                         Utils.changeAlpha(mIvBackImage, APPEAR_ALPHA);
@@ -283,11 +292,13 @@ public class ReferenceFragment extends Fragment {
                         switch (attachedFragment) {
                             case R.layout.fragment_camera:
                                 attachedFragment = R.layout.fragment_photo;
+                                Utils.moveTo(view, mBtnPositionAtPhoto.getX(), mBtnPositionAtPhoto.getY());
                                 ((MainActivity) getActivity()).getCameraFragment().takePhoto();
                                 ((MainActivity) getActivity()).jumpToPhotoFragment();
                                 break;
                             case R.layout.fragment_photo:
                                 attachedFragment = R.layout.fragment_camera;
+                                Utils.moveTo(view, mBtnPositionAtCamera.getX(), mBtnPositionAtCamera.getY());
                                 ((MainActivity) getActivity()).jumpToCameraFragment();
                                 ((MainActivity) getActivity()).getPhotoFragment().setRefLength(mSelectedLength);
                                 break;
@@ -296,7 +307,7 @@ public class ReferenceFragment extends Fragment {
                     break;
                 case R.id.ivBackImage:
                     fragmentIsVisible = true;
-                    Utils.moveTo(mIvCameraImage, mBtnStartButton.getX(), mBtnStartButton.getY());
+                    Utils.moveTo(mIvCameraImage, mBtnPositionAtReference.getX(), mBtnPositionAtReference.getY());
                     Utils.slideDown(mReferenceLayout);
                     Utils.slideDown(mSvContentList);
                     Utils.changeAlpha(mIvBackImage, DISAPPEAR_ALPHA);
