@@ -31,7 +31,6 @@ public class CameraFragment extends Fragment {
     private static final String TAG = "CameraFragment";
     private Camera camera;
     private boolean preview = false;
-    private ImageView mIvBackImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,8 +44,6 @@ public class CameraFragment extends Fragment {
         surfaceView.getHolder().setFixedSize(200, 200);
         surfaceView.getHolder().addCallback(new SurfaceViewCallback());
 
-        mIvBackImage = (ImageView) rootView.findViewById(R.id.ivBackImage);
-        mIvBackImage.setOnClickListener(((MainActivity) getActivity()).getReferenceFragment().onClickListener);
         return rootView;
     }
 

@@ -34,17 +34,20 @@ public class ReferenceFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_reference, container, false);
     }
 
-    static final float APPEAR_ALPHA = 1.0f;
+    private static final float APPEAR_ALPHA = 1.0f;
+    private static final float DISAPPEAR_ALPHA = 0.0f;
 
     private Button mBtnStartButton;
     private Button mBtnEndButton;
 
     private ImageView mIvCameraImage;
+    private ImageView mIvBackImage;
 
     private View mReferenceLayout;
-
     private ListView mLvReference;
     private ScrollView mSvContentList;
+
+    private double mSelectedLength = 0;
 
     @Override
     public void onStart() {
@@ -59,6 +62,8 @@ public class ReferenceFragment extends Fragment {
 
         mIvCameraImage = (ImageView) getActivity().findViewById(R.id.ivCameraImage);
         mIvCameraImage.setOnClickListener(onClickListener);
+        mIvBackImage = (ImageView) getActivity().findViewById(R.id.ivBackImage);
+        mIvBackImage.setOnClickListener(onClickListener);
 
         mReferenceLayout = getActivity().findViewById(R.id.referenceLayout);
 
@@ -131,6 +136,7 @@ public class ReferenceFragment extends Fragment {
                 tvDate.setText("Date: " + objects[position].date);
                 tvDescription.setText(objects[position].description);
                 ivImage.setImageResource(objects[position].imageSrcId);
+                mSelectedLength = objects[position].length;
 
                 newDetail.animate().setInterpolator(new AccelerateDecelerateInterpolator())
                         .x(oldDetail.getX()).y(oldDetail.getY()).setDuration(Utils.ANIMATION_TIME);
@@ -220,7 +226,8 @@ public class ReferenceFragment extends Fragment {
 
     public View.OnClickListener onClickListener = new View.OnClickListener() {
 
-        private boolean cameraButtonState = false;
+        private boolean fragmentIsVisible = true;
+        private int attachedFragment = R.layout.fragment_camera;
 
         @Override
         public void onClick(View view) {
@@ -230,22 +237,34 @@ public class ReferenceFragment extends Fragment {
 
             switch (view.getId()) {
                 case R.id.ivCameraImage:
-                    if (!cameraButtonState) {
-                        cameraButtonState = true;
+                    if (fragmentIsVisible) {
+                        fragmentIsVisible = false;
                         Utils.moveTo(view, mBtnEndButton.getX(), mBtnEndButton.getY());
                         Utils.slideUp(mReferenceLayout, barGap);
                         Utils.slideUp(mSvContentList, -bottomGap);
+                        Utils.changeAlpha(mIvBackImage, APPEAR_ALPHA);
+                        ((MainActivity) getActivity()).getPhotoFragment().setRefLength(mSelectedLength);
                     } else {
-                        cameraButtonState = false;
-                        ((MainActivity) getActivity()).getCameraFragment().takePhoto();
-                        ((MainActivity) getActivity()).jumpToPhotoFragment();
+                        switch (attachedFragment) {
+                            case R.layout.fragment_camera:
+                                attachedFragment = R.layout.fragment_photo;
+                                ((MainActivity) getActivity()).getCameraFragment().takePhoto();
+                                ((MainActivity) getActivity()).jumpToPhotoFragment();
+                                break;
+                            case R.layout.fragment_photo:
+                                attachedFragment = R.layout.fragment_camera;
+                                ((MainActivity) getActivity()).jumpToCameraFragment();
+                                ((MainActivity) getActivity()).getPhotoFragment().setRefLength(mSelectedLength);
+                                break;
+                        }
                     }
                     break;
                 case R.id.ivBackImage:
-                    cameraButtonState = false;
+                    fragmentIsVisible = true;
                     Utils.moveTo(mIvCameraImage, mBtnStartButton.getX(), mBtnStartButton.getY());
                     Utils.slideDown(mReferenceLayout);
                     Utils.slideDown(mSvContentList);
+                    Utils.changeAlpha(mIvBackImage, DISAPPEAR_ALPHA);
                     break;
 
             }
@@ -257,22 +276,28 @@ class Utils {
 
     static final int ANIMATION_TIME = 700;
 
-    public static void slideUp(View theView, float delta) {
-        theView.animate().setInterpolator(new AccelerateDecelerateInterpolator())
+    public static void slideUp(View view, float delta) {
+        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
                 .translationY(-delta)
                 .setDuration(ANIMATION_TIME);
     }
 
-    public static void slideDown(View theView) {
-        theView.animate().setInterpolator(new AccelerateDecelerateInterpolator())
+    public static void slideDown(View view) {
+        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
                 .translationY(0)
                 .setDuration(ANIMATION_TIME);
     }
 
-    public static void moveTo(View theView, float aimX, float aimY) {
-        theView.animate().setInterpolator(new AccelerateDecelerateInterpolator())
+    public static void moveTo(View view, float aimX, float aimY) {
+        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
                 .x(aimX)
                 .y(aimY)
+                .setDuration(ANIMATION_TIME);
+    }
+
+    public static void changeAlpha(View view, float aimAlpha) {
+        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
+                .alpha(aimAlpha)
                 .setDuration(ANIMATION_TIME);
     }
 }

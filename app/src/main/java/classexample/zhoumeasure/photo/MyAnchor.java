@@ -1,20 +1,26 @@
 package classexample.zhoumeasure.photo;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 /**
  * Created by Xiaozhou on 2015/8/6.
  */
 public class MyAnchor extends View {
+
     Bitmap m_img;
     Paint m_paint = new Paint();
     float m_radius = 20f, m_x, m_y;
+    boolean m_isDown = false;
 
     public MyAnchor(Context context) {
         super(context);
@@ -22,23 +28,10 @@ public class MyAnchor extends View {
         m_paint.setStyle(Paint.Style.FILL);
         m_x = 100f;
         //setPosition(getRootView().getWidth() / 2, getRootView().getHeight() / 2);
+    }
 
-        setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Log.d("zxz", String.valueOf(event.getX()) + ", " + String.valueOf(event.getY()));
-                switch (event.getAction() & MotionEvent.ACTION_MASK) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        setPosition(event.getX(), event.getY());
-//                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        Log.d("zxz", "Mve!"+event.getX()+", "+event.getY());
-                        setPosition(event.getX(), event.getY());
-                        break;
-                }
-                return true;
-            }
-        });
+    public void setColor(int a, int r, int g, int b){
+        m_paint.setARGB(a, r, g, b);
     }
 
     public float getX(){
@@ -57,11 +50,21 @@ public class MyAnchor extends View {
         this.invalidate();
     }
 
+    public boolean onThisArea(float x, float y){
+        if(     (x < (m_x + m_radius/1.414)) &&
+                (x > (m_x - m_radius/1.414)) &&
+                (y < (m_y + m_radius/1.414)) &&
+                (y > (m_y - m_radius/1.414))  )
+            return true;
+        else
+            return false;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
 
         super.onDraw(canvas);
-        Log.d("zxz", " redraw");
+        Log.d("zxz", " anchorRedraw");
         canvas.drawCircle(m_x,m_y,m_radius,m_paint);
     }
 

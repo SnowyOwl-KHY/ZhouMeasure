@@ -17,12 +17,12 @@ public class MainActivity extends Activity {
     private CameraFragment cameraFragment = new CameraFragment();
     private PhotoFragment photoFragment = new PhotoFragment();
 
-    public ReferenceFragment getReferenceFragment() {
-        return referenceFragment;
-    }
-
     public CameraFragment getCameraFragment() {
         return cameraFragment;
+    }
+
+    public PhotoFragment getPhotoFragment() {
+        return photoFragment;
     }
 
     @Override
@@ -59,11 +59,11 @@ public class MainActivity extends Activity {
     }
 
     public void jumpToPhotoFragment() {
-        getFragmentManager().beginTransaction().detach(cameraFragment).attach(photoFragment).commit();
+        getFragmentManager().beginTransaction().hide(cameraFragment).show(photoFragment).commit();
     }
 
     public void jumpToCameraFragment() {
-        getFragmentManager().beginTransaction().detach(photoFragment).attach(cameraFragment).commit();
+        getFragmentManager().beginTransaction().hide(photoFragment).show(cameraFragment).commit();
     }
 
 }
