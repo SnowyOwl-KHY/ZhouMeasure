@@ -46,6 +46,8 @@ public class ReferenceFragment extends Fragment {
     private ImageView mIvCameraImage;
     private ImageView mIvBackImage;
 
+    private ImageView mIvAddReference;
+
     private View mReferenceLayout;
     private ListView mLvReference;
     private ScrollView mSvContentList;
@@ -69,6 +71,14 @@ public class ReferenceFragment extends Fragment {
         mIvCameraImage.setOnClickListener(onClickListener);
         mIvBackImage = (ImageView) getActivity().findViewById(R.id.ivBackImage);
         mIvBackImage.setOnClickListener(onClickListener);
+
+        mIvAddReference = (ImageView) getActivity().findViewById(R.id.ivAddReference);
+        mIvAddReference.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).jumpToAddFragment();
+            }
+        });
 
         mReferenceLayout = getActivity().findViewById(R.id.referenceLayout);
 
@@ -267,6 +277,7 @@ public class ReferenceFragment extends Fragment {
                         Utils.slideUp(mReferenceLayout, barGap);
                         Utils.slideUp(mSvContentList, -bottomGap);
                         Utils.changeAlpha(mIvBackImage, APPEAR_ALPHA);
+                        Utils.moveTo(mIvAddReference, mIvAddReference.getX(), mIvAddReference.getY() - mIvAddReference.getHeight() - barGap);
                         ((MainActivity) getActivity()).getPhotoFragment().setRefLength(mSelectedLength);
                     } else {
                         switch (attachedFragment) {
@@ -289,39 +300,10 @@ public class ReferenceFragment extends Fragment {
                     Utils.slideDown(mReferenceLayout);
                     Utils.slideDown(mSvContentList);
                     Utils.changeAlpha(mIvBackImage, DISAPPEAR_ALPHA);
+                    Utils.moveTo(mIvAddReference, mIvAddReference.getX(), mIvAddReference.getY() + mIvAddReference.getHeight() + barGap);
                     break;
             }
         }
     };
-}
-
-class Utils {
-
-    static final int ANIMATION_TIME = 700;
-
-    public static void slideUp(View view, float delta) {
-        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
-                .translationY(-delta)
-                .setDuration(ANIMATION_TIME);
-    }
-
-    public static void slideDown(View view) {
-        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
-                .translationY(0)
-                .setDuration(ANIMATION_TIME);
-    }
-
-    public static void moveTo(View view, float aimX, float aimY) {
-        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
-                .x(aimX)
-                .y(aimY)
-                .setDuration(ANIMATION_TIME);
-    }
-
-    public static void changeAlpha(View view, float aimAlpha) {
-        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
-                .alpha(aimAlpha)
-                .setDuration(ANIMATION_TIME);
-    }
 }
 
