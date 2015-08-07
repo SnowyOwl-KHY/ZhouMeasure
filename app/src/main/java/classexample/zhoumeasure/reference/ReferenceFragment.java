@@ -43,7 +43,6 @@ public class ReferenceFragment extends Fragment {
 
     private Button mBtnPositionAtReference;
     private Button mBtnPositionAtCamera;
-    private Button mBtnPositionAtPhoto;
 
     private ImageView mIvCameraImage;
     public ImageView mIvBackImage;
@@ -68,7 +67,6 @@ public class ReferenceFragment extends Fragment {
 
         mBtnPositionAtReference = (Button) getActivity().findViewById(R.id.btnCameraPositionAtReferenceFragment);
         mBtnPositionAtCamera = (Button) getActivity().findViewById(R.id.btnCameraPositionAtCameraFragment);
-        mBtnPositionAtPhoto = (Button) getActivity().findViewById(R.id.btnCameraPositionAtPhotoFragment);
 
         mIvCameraImage = (ImageView) getActivity().findViewById(R.id.ivCameraImage);
         mIvCameraImage.setOnClickListener(onClickListener);

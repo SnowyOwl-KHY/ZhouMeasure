@@ -36,16 +36,6 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/btnCameraPositionAtPhotoFragment"
-        android:layout_width="@dimen/big_circle_size"
-        android:layout_height="@dimen/big_circle_size"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="100dp"
-        android:visibility="invisible" />
-
-    <Button
         android:id="@+id/btnCameraPositionAtCameraFragment"
         android:layout_width="@dimen/big_circle_size"
         android:layout_height="@dimen/big_circle_size"
