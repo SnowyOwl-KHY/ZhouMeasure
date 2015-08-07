@@ -2,6 +2,7 @@ package classexample.zhoumeasure.photo;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -16,7 +17,6 @@ public class MyLine extends View{
 
     MyAnchor[] m_anchor = new MyAnchor[4];
     Paint m_paint = new Paint();
-
     public MyLine(Context context) {
 
         super(context);
@@ -26,10 +26,10 @@ public class MyLine extends View{
         {
             m_anchor[i] = new MyAnchor(context);
             if(i<2) {
-                m_anchor[i].setColor(255, 255, 0, 0);
+                m_anchor[i].setColor(255, 151, 203, 0);
             }
             else {
-                m_anchor[i].setColor(255, 0, 0, 255);
+                m_anchor[i].setColor(180, 2, 143, 245);
             }
         }
 
@@ -106,7 +106,7 @@ public class MyLine extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        m_paint.setARGB(180, 160, 191, 124);
+        m_paint.setARGB(180, 151, 203, 0);
         canvas.drawLine(m_anchor[0].getX(), m_anchor[0].getY(), m_anchor[1].getX(), m_anchor[1].getY(), m_paint);
         m_paint.setARGB(180, 2, 143, 245);
         canvas.drawLine(m_anchor[2].getX(), m_anchor[2].getY(), m_anchor[3].getX(), m_anchor[3].getY(), m_paint);
