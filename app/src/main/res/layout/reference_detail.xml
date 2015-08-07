@@ -5,7 +5,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/ivReferenceObjectImage"
+        android:id="@+id/ivReferenceImage"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginLeft="10dp" />
@@ -17,26 +17,26 @@
         android:layout_marginLeft="10dp">
 
         <TextView
-            android:id="@+id/tvReferenceObjectName"
+            android:id="@+id/tvReferenceName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/tvReferenceObjectSize"
+            android:id="@+id/tvReferenceSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="" />
         <TextView
-            android:id="@+id/tvReferenceObjectDate"
+            android:id="@+id/tvReferenceDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="" />
         <TextView
-            android:id="@+id/tvReferenceObjectDescription"
+            android:id="@+id/tvReferenceDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

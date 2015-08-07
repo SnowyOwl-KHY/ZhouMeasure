@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import classexample.zhoumeasure.reference.ReferenceFragment;
+
 
 public class MainActivity extends Activity {
 
@@ -13,6 +15,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getFragmentManager().beginTransaction().add(R.id.mainActivity, new ReferenceFragment()).commit();
     }
 
     @Override
