@@ -29,7 +29,7 @@
             android:id="@+id/refLen"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textColor="#ffff0000"
+            android:textColor="#407434"
             android:textSize="20dp"
             android:layout_alignParentTop="true" />
 
@@ -41,7 +41,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:textColor="#ff0000ff"
+            android:textColor="#028ff5"
             android:textIsSelectable="false"
             android:textSize="20dp" />
 
