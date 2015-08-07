@@ -13,13 +13,13 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/knownLengthLayout"
+        android:id="@+id/referenceLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/reference_list_height"
         android:background="@color/theme_default_primary">
 
         <TextView
-            android:id="@+id/tvKnownObjectTitle"
+            android:id="@+id/tvReferenceTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Reference Object"
@@ -31,7 +31,7 @@
             android:id="@+id/lvReference"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvKnownObjectTitle"></ListView>
+            android:layout_below="@id/tvReferenceTitle"></ListView>
 
     </RelativeLayout>
 
@@ -40,11 +40,8 @@
         android:layout_width="@dimen/circle_size"
         android:layout_height="@dimen/circle_size"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_centerHorizontal="true"
         android:visibility="invisible" />
 
     <Button
@@ -53,7 +50,7 @@
         android:layout_height="@dimen/circle_size"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/knownLengthLayout"
+        android:layout_below="@+id/referenceLayout"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="-26dp"
@@ -63,7 +60,7 @@
         android:id="@+id/svContentList"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/knownLengthLayout"
+        android:layout_below="@id/referenceLayout"
         android:background="@color/white">
 
         <TableLayout
@@ -78,25 +75,12 @@
     </ScrollView>
 
     <ImageView
-        android:id="@+id/ivBackImage"
-        android:layout_width="@dimen/circle_size"
-        android:layout_height="@dimen/circle_size"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/knownLengthLayout"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="-26dp"
-        android:alpha="0"
-        android:src="@drawable/back_icon" />
-
-    <ImageView
         android:id="@+id/ivCameraImage"
         android:layout_width="@dimen/circle_size"
         android:layout_height="@dimen/circle_size"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/knownLengthLayout"
+        android:layout_below="@+id/referenceLayout"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="-26dp"

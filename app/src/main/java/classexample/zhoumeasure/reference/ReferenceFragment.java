@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import classexample.zhoumeasure.MainActivity;
 import classexample.zhoumeasure.R;
 
 /**
@@ -32,14 +33,13 @@ public class ReferenceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reference, container, false);
     }
+
     static final float APPEAR_ALPHA = 1.0f;
-    static final float DISAPPEAR_ALPHA = 0.0f;
 
     private Button mBtnStartButton;
     private Button mBtnEndButton;
 
     private ImageView mIvCameraImage;
-    private ImageView mIvBackImage;
 
     private View mReferenceLayout;
 
@@ -58,11 +58,9 @@ public class ReferenceFragment extends Fragment {
         mBtnEndButton = (Button) getActivity().findViewById(R.id.btnEndPosition);
 
         mIvCameraImage = (ImageView) getActivity().findViewById(R.id.ivCameraImage);
-        mIvBackImage = (ImageView) getActivity().findViewById(R.id.ivBackImage);
-        mIvCameraImage.setOnClickListener(cameraImageClickListener);
-        mIvBackImage.setOnClickListener(cameraImageClickListener);
+        mIvCameraImage.setOnClickListener(onClickListener);
 
-        mReferenceLayout = getActivity().findViewById(R.id.knownLengthLayout);
+        mReferenceLayout = getActivity().findViewById(R.id.referenceLayout);
 
         mLvReference = (ListView) getActivity().findViewById(R.id.lvReference);
         mSvContentList = (ScrollView) getActivity().findViewById(R.id.svContentList);
@@ -137,7 +135,7 @@ public class ReferenceFragment extends Fragment {
                 newDetail.animate().setInterpolator(new AccelerateDecelerateInterpolator())
                         .x(oldDetail.getX()).y(oldDetail.getY()).setDuration(Utils.ANIMATION_TIME);
                 oldDetail.animate().setInterpolator(new AccelerateDecelerateInterpolator())
-                        .x(oldDetail.getX()-oldDetail.getWidth()).y(oldDetail.getY()).setDuration(Utils.ANIMATION_TIME);
+                        .x(oldDetail.getX() - oldDetail.getWidth()).y(oldDetail.getY()).setDuration(Utils.ANIMATION_TIME);
             }
         });
     }
@@ -220,42 +218,61 @@ public class ReferenceFragment extends Fragment {
         }
     }
 
-    View.OnClickListener cameraImageClickListener = new View.OnClickListener() {
+    public View.OnClickListener onClickListener = new View.OnClickListener() {
+
+        private boolean cameraButtonState = false;
+
         @Override
         public void onClick(View view) {
 
             float barGap = mReferenceLayout.getHeight();
             float bottomGap = mSvContentList.getHeight();
 
-            if (Utils.getCenterY(view) == Utils.getCenterY(mBtnStartButton)) { // Move down
-
-                // FAB animation
-
-                Utils.moveTo(view, mBtnEndButton, APPEAR_ALPHA);
-                Utils.moveTo(mIvCameraImage, mBtnEndButton, DISAPPEAR_ALPHA);
-                Utils.moveTo(mIvBackImage, mBtnEndButton, APPEAR_ALPHA);
-
-                // Fat Bar animation
-                Utils.slideUp(mReferenceLayout, barGap);
-
-                // Content
-                Utils.slideUp(mSvContentList, -bottomGap);
-
-            } else if (Utils.getCenterY(view) == Utils.getCenterY(mBtnEndButton)) { //Move up
-
-                // FAB animation
-
-                Utils.moveTo(view, mBtnStartButton, APPEAR_ALPHA);
-                Utils.moveTo(mIvCameraImage, mBtnStartButton, APPEAR_ALPHA);
-                Utils.moveTo(mIvBackImage, mBtnStartButton, DISAPPEAR_ALPHA);
-
-                // Fat Bar animation
-                Utils.slideDown(mReferenceLayout);
-
-                //Content
-                Utils.slideDown(mSvContentList);
+            switch (view.getId()) {
+                case R.id.ivCameraImage:
+                    if (!cameraButtonState) {
+                        cameraButtonState = true;
+                        Utils.moveTo(view, mBtnEndButton.getX(), mBtnEndButton.getY());
+                        Utils.slideUp(mReferenceLayout, barGap);
+                        Utils.slideUp(mSvContentList, -bottomGap);
+                    } else {
+                        cameraButtonState = false;
+                        ((MainActivity) getActivity()).getCameraFragment().takePhoto();
+                    }
+                    break;
+                case R.id.ivBackImage:
+                    cameraButtonState = false;
+                    Utils.moveTo(mIvCameraImage, mBtnStartButton.getX(), mBtnStartButton.getY());
+                    Utils.slideDown(mReferenceLayout);
+                    Utils.slideDown(mSvContentList);
+                    break;
 
             }
         }
     };
 }
+
+class Utils {
+
+    static final int ANIMATION_TIME = 700;
+
+    public static void slideUp(View theView, float delta) {
+        theView.animate().setInterpolator(new AccelerateDecelerateInterpolator())
+                .translationY(-delta)
+                .setDuration(ANIMATION_TIME);
+    }
+
+    public static void slideDown(View theView) {
+        theView.animate().setInterpolator(new AccelerateDecelerateInterpolator())
+                .translationY(0)
+                .setDuration(ANIMATION_TIME);
+    }
+
+    public static void moveTo(View theView, float aimX, float aimY) {
+        theView.animate().setInterpolator(new AccelerateDecelerateInterpolator())
+                .x(aimX)
+                .y(aimY)
+                .setDuration(ANIMATION_TIME);
+    }
+}
+

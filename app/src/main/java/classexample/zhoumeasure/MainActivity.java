@@ -5,17 +5,29 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import classexample.zhoumeasure.camera.CameraFragment;
 import classexample.zhoumeasure.reference.ReferenceFragment;
 
 
 public class MainActivity extends Activity {
 
+    private ReferenceFragment referenceFragment = new ReferenceFragment();
+    private CameraFragment cameraFragment = new CameraFragment();
+
+    public ReferenceFragment getReferenceFragment() {
+        return referenceFragment;
+    }
+
+    public CameraFragment getCameraFragment() {
+        return cameraFragment;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getFragmentManager().beginTransaction().add(R.id.mainActivity, new ReferenceFragment()).commit();
+        getFragmentManager().beginTransaction().add(R.id.mainActivity, cameraFragment).commit();
+        getFragmentManager().beginTransaction().add(R.id.mainActivity, referenceFragment).commit();
     }
 
     @Override
