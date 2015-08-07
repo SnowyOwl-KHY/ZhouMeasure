@@ -13,6 +13,18 @@
         android:id="@+id/drawArea"
         android:layout_alignParentBottom="true">
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            android:id="@+id/bottomBar"
+            android:layout_alignParentBottom="true"
+            android:src="@color/theme_default_primary_dark"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/btnRuler"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,30 +47,30 @@
             android:textColor="#ff0000ff"
             android:textIsSelectable="false"
             android:textSize="20dp" />
+
+        <classexample.zhoumeasure.photo.LightButton
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:background="@null"
+            android:id="@+id/btnRuler"
+            android:src="@drawable/ruler_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/btnPencil"
+            android:layout_toEndOf="@+id/btnPencil"
+            android:layout_marginLeft="10dp"/>
+
+        <classexample.zhoumeasure.photo.LightButton
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:background="@null"
+            android:id="@+id/btnPencil"
+            android:src="@drawable/pencil_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"/>
+
     </RelativeLayout>
-
-    <classexample.zhoumeasure.photo.LightButton
-        android:layout_width="@dimen/circle_size"
-        android:layout_height="@dimen/circle_size"
-        android:background="@null"
-        android:id="@+id/btnPencil"
-        android:src="@drawable/pencil_icon"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
-
-    <classexample.zhoumeasure.photo.LightButton
-        android:layout_width="@dimen/circle_size"
-        android:layout_height="@dimen/circle_size"
-        android:background="@null"
-        android:id="@+id/btnRuler"
-        android:src="@drawable/ruler_icon"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@id/btnPencil" />
 
 
 </RelativeLayout>
