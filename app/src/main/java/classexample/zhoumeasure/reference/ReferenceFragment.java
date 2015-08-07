@@ -238,6 +238,7 @@ public class ReferenceFragment extends Fragment {
                     } else {
                         cameraButtonState = false;
                         ((MainActivity) getActivity()).getCameraFragment().takePhoto();
+                        ((MainActivity) getActivity()).jumpToPhotoFragment();
                     }
                     break;
                 case R.id.ivBackImage:

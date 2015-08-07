@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    android:background="@drawable/tempbackground"
+                >
+
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/imageView"-->
+        <!--android:src="@drawable/tempbackground"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"/>-->
+
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/cameraBtn"
+        android:background="@null"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@null"
+        android:src="@drawable/camera_icon"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+
+    <classexample.zhoumeasure.photo.LightButton
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@null"
+        android:id="@+id/view"
+        android:src="@drawable/pencil_64px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"/>
+
+    <classexample.zhoumeasure.photo.LightButton
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@null"
+        android:id="@+id/view2"
+        android:src="@drawable/ruler_64px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/drawArea"
+        android:layout_alignParentBottom="true"></RelativeLayout>
+
+
+</RelativeLayout>

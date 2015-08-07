@@ -1,11 +1,13 @@
 package classexample.zhoumeasure;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import classexample.zhoumeasure.camera.CameraFragment;
+import classexample.zhoumeasure.photo.PhotoFragment;
 import classexample.zhoumeasure.reference.ReferenceFragment;
 
 
@@ -13,6 +15,7 @@ public class MainActivity extends Activity {
 
     private ReferenceFragment referenceFragment = new ReferenceFragment();
     private CameraFragment cameraFragment = new CameraFragment();
+    private PhotoFragment photoFragment = new PhotoFragment();
 
     public ReferenceFragment getReferenceFragment() {
         return referenceFragment;
@@ -26,8 +29,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getFragmentManager().beginTransaction().add(R.id.mainActivity, cameraFragment).commit();
-        getFragmentManager().beginTransaction().add(R.id.mainActivity, referenceFragment).commit();
+        getFragmentManager().beginTransaction()
+                .add(R.id.mainActivity, photoFragment)
+                .add(R.id.mainActivity, cameraFragment)
+                .add(R.id.mainActivity, referenceFragment)
+                .commit();
     }
 
     @Override
@@ -51,4 +57,13 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void jumpToPhotoFragment() {
+        getFragmentManager().beginTransaction().detach(cameraFragment).attach(photoFragment).commit();
+    }
+
+    public void jumpToCameraFragment() {
+        getFragmentManager().beginTransaction().detach(photoFragment).attach(cameraFragment).commit();
+    }
+
 }
