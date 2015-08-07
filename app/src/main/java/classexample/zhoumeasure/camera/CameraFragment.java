@@ -24,6 +24,7 @@ import java.io.IOException;
 
 import classexample.zhoumeasure.MainActivity;
 import classexample.zhoumeasure.R;
+import classexample.zhoumeasure.photo.PhotoFragment;
 
 /**
  * Created by Xiaozhou on 2015/8/7.
@@ -142,6 +143,7 @@ public class CameraFragment extends Fragment {
 //                e.printStackTrace();
 //            }
             // 在拍照的时候相机是被占用的,拍照之后需要重新预览
+            PhotoFragment.instance.setBitmap(sendBM);
             camera.startPreview();
         }
     }

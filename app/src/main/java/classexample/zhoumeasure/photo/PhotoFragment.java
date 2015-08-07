@@ -51,7 +51,7 @@ public class PhotoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        setBitmap(CameraFragment.sendBM);
+
         instance = this;
 
         m_rootView = inflater.inflate(R.layout.fragment_photo, container, false);
@@ -59,8 +59,8 @@ public class PhotoFragment extends Fragment {
 
         // set background
         m_drawArea = (RelativeLayout) m_rootView.findViewById(R.id.drawArea);
-        Drawable m_tempDr = new BitmapDrawable(CameraFragment.sendBM);
-        m_drawArea.setBackground(m_tempDr);
+//        Bitmap bitmapa = BitmapFactory.decodeResource(getResources(), R.drawable.laptop);
+//        setBitmap(CameraFragment.sendBM);
 
         // get width
         WindowManager wm = (WindowManager) m_drawArea.getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -118,6 +118,9 @@ public class PhotoFragment extends Fragment {
 
     public void setBitmap(Bitmap inBitmap) {
         m_bitmap = inBitmap;
+        Drawable m_tempDr = new BitmapDrawable(m_bitmap);
+        m_drawArea.setBackground(m_tempDr);
+
     }
 
     public void setRefLength(double inRefLength) {
