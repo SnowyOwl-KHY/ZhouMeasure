@@ -26,7 +26,7 @@ public class MyLine extends View{
         {
             m_anchor[i] = new MyAnchor(context);
             if(i<2) {
-                m_anchor[i].setColor(255, 64, 116, 52);
+                m_anchor[i].setColor(255, 151, 203, 0);
             }
             else {
                 m_anchor[i].setColor(180, 2, 143, 245);
@@ -106,7 +106,7 @@ public class MyLine extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        m_paint.setARGB(180, 64, 116, 52);
+        m_paint.setARGB(180, 151, 203, 0);
         canvas.drawLine(m_anchor[0].getX(), m_anchor[0].getY(), m_anchor[1].getX(), m_anchor[1].getY(), m_paint);
         m_paint.setARGB(180, 2, 143, 245);
         canvas.drawLine(m_anchor[2].getX(), m_anchor[2].getY(), m_anchor[3].getX(), m_anchor[3].getY(), m_paint);
