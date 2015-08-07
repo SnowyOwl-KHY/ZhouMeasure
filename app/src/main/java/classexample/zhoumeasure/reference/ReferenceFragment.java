@@ -277,6 +277,7 @@ public class ReferenceFragment extends Fragment {
                         Utils.slideUp(mReferenceLayout, barGap);
                         Utils.slideUp(mSvContentList, -bottomGap);
                         Utils.changeAlpha(mIvBackImage, APPEAR_ALPHA);
+                        Utils.moveTo(mIvAddReference, mIvAddReference.getX(), mIvAddReference.getY() - mIvAddReference.getHeight() - barGap);
                         ((MainActivity) getActivity()).getPhotoFragment().setRefLength(mSelectedLength);
                     } else {
                         switch (attachedFragment) {
@@ -299,6 +300,7 @@ public class ReferenceFragment extends Fragment {
                     Utils.slideDown(mReferenceLayout);
                     Utils.slideDown(mSvContentList);
                     Utils.changeAlpha(mIvBackImage, DISAPPEAR_ALPHA);
+                    Utils.moveTo(mIvAddReference, mIvAddReference.getX(), mIvAddReference.getY() + mIvAddReference.getHeight() + barGap);
                     break;
             }
         }
