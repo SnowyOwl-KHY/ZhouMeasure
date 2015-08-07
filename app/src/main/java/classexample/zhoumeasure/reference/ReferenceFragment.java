@@ -272,7 +272,7 @@ public class ReferenceFragment extends Fragment {
             float barGap = mReferenceLayout.getHeight();
             float bottomGap = mSvContentList.getHeight();
 
-            final int Y_DIFF = 168;
+            final int Y_DIFF = 68;
             final int X_DIFF = 172;
 
             switch (view.getId()) {
