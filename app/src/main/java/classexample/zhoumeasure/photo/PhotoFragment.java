@@ -76,6 +76,19 @@ public class PhotoFragment extends Fragment {
         m_drawArea.addView(m_line);
         m_line.addAnchors();
 
+
+        mRulerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("zxz", "onClickRuler");
+            }
+        });
+        mCalcBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("zxz","onClickRuler");
+            }
+        });
         setResult();
 
         return m_rootView;
