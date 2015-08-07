@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -11,4 +13,22 @@
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>
+
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        wheel:matProg_barColor="#5588FF"
+        wheel:matProg_progressIndeterminate="true"
+        />
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/progress_wheel"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        wheel:matProg_barColor="#5588FF"
+        wheel:matProg_progressIndeterminate="true" />
 </RelativeLayout>
