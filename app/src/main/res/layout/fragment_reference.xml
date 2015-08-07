@@ -85,7 +85,7 @@
         android:src="@drawable/camera" />
 
     <ImageView
-        android:id="@+id/ivAddImage"
+        android:id="@+id/ivAddReference"
         android:layout_width="@dimen/small_circle_size"
         android:layout_height="@dimen/small_circle_size"
         android:layout_alignParentEnd="true"
