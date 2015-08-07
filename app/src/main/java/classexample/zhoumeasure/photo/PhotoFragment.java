@@ -68,13 +68,13 @@ public class PhotoFragment extends Fragment {
 
         Log.d("ly", "" + width);
 
-        m_refLenView.setText("Ref: " + m_refLength + "cm");
-        m_tarLenView.setText("Tar: " + "Null");
-
         m_line = new MyLine(m_drawArea.getContext());
         m_line.setPosition(width / 3);
         m_drawArea.addView(m_line);
         m_line.addAnchors();
+
+        setResult();
+
         return m_rootView;
     }
 
@@ -83,12 +83,15 @@ public class PhotoFragment extends Fragment {
         super.onStart();
     }
 
-    public void setResult() {
-        Log.e("blabla", "ok");
+    public void setResult(){
         m_tarLength = m_line.calPropotion() * m_refLength;
         m_refLenView.setText("Ref: " + m_refLength + "cm");
+        m_refLenView.setX(Math.abs(m_line.m_anchor[0].m_x + m_line.m_anchor[1].m_x) / 2 - m_refLenView.getWidth() / 2);
+        m_refLenView.setY(Math.abs(m_line.m_anchor[0].m_y + m_line.m_anchor[1].m_y) / 2 - m_tarLenView.getHeight());
         DecimalFormat format = new DecimalFormat("#.0");
         m_tarLenView.setText("Tar: " + format.format(m_tarLength) + "cm");
+        m_tarLenView.setX(Math.abs(m_line.m_anchor[2].m_x + m_line.m_anchor[3].m_x) / 2 - m_tarLenView.getWidth() / 2);
+        m_tarLenView.setY(Math.abs(m_line.m_anchor[2].m_y + m_line.m_anchor[3].m_y) / 2 - m_tarLenView.getHeight());
     }
 
     public void setBitmap(Bitmap inBitmap) {
