@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:id="@+id/addContainer">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/addContainer">
 
 
     <EditText
@@ -26,4 +26,58 @@
         android:layout_alignBottom="@+id/nameInput"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/document2_128"
+        android:layout_marginTop="41dp"
+        android:layout_below="@+id/fingerIcon"
+        android:layout_alignLeft="@+id/fingerIcon"
+        android:layout_alignStart="@+id/fingerIcon"/>
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:id="@+id/desInput"
+        android:hint="Description"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/rulers_128"
+        android:layout_marginTop="53dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"/>
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:id="@+id/lengthInput"
+        android:hint="Length"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        />
+
+    <com.dd.CircularProgressButton
+        android:id="@+id/submitAdd"
+        android:layout_width="196dp"
+        android:layout_height="50dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cpb_textComplete="Complete"
+        app:cpb_textError="Error"
+        app:cpb_textIdle="Submit"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="41dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="34dp"/>
+
 </RelativeLayout>
