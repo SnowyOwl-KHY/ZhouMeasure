@@ -62,8 +62,8 @@ public class ReferenceFragment extends Fragment {
 
     private void initialUIElement() {
 
-        mBtnStartButton = (Button) getActivity().findViewById(R.id.btnStartPosition);
-        mBtnEndButton = (Button) getActivity().findViewById(R.id.btnEndPosition);
+        mBtnStartButton = (Button) getActivity().findViewById(R.id.btnCameraStartPosition);
+        mBtnEndButton = (Button) getActivity().findViewById(R.id.btnCameraEndPosition);
 
         mIvCameraImage = (ImageView) getActivity().findViewById(R.id.ivCameraImage);
         mIvCameraImage.setOnClickListener(onClickListener);
