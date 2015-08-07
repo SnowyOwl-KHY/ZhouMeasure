@@ -46,55 +46,55 @@
             android:textIsSelectable="false"
             android:textSize="20dp" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:id="@+id/toolsContainer"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
-            <ImageView
-                android:layout_width="@dimen/circle_size"
-                android:layout_height="@dimen/circle_size"
-                android:id="@+id/btnRuler"
-                android:layout_weight="1"
-                android:src="@drawable/ruler"
-                android:layout_alignTop="@+id/bottomBar"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"/>
-
-            <ImageView
-                android:layout_width="@dimen/circle_size"
-                android:layout_height="@dimen/circle_size"
-                android:id="@+id/btnCalc"
-                android:layout_weight="1"
-                android:src="@drawable/calculator"
-                android:layout_alignTop="@+id/bottomBar"
-                android:layout_toRightOf="@+id/btnRuler"
-                android:layout_toEndOf="@+id/btnRuler"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"/>
-
-            <ImageView
-                android:layout_width="@dimen/circle_size"
-                android:layout_height="@dimen/circle_size"
-                android:id="@+id/blankCameraBtn"
-                android:layout_weight="1"
-                android:src="#00ffffff"/>
-
-            <ImageView
-                android:layout_width="@dimen/circle_size"
-                android:layout_height="@dimen/circle_size"
-                android:id="@+id/blankReturnBtn"
-                android:layout_weight="1"
-                android:src="#00ffffff"/>
-        </LinearLayout>
-
     </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:id="@+id/toolsContainer"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:id="@+id/btnRuler"
+            android:layout_weight="1"
+            android:src="@drawable/ruler"
+            android:layout_alignTop="@+id/bottomBar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"/>
+
+        <ImageView
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:id="@+id/btnCalc"
+            android:layout_weight="1"
+            android:src="@drawable/calculator"
+            android:layout_alignTop="@+id/bottomBar"
+            android:layout_toRightOf="@+id/btnRuler"
+            android:layout_toEndOf="@+id/btnRuler"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:id="@+id/blankCameraBtn"
+            android:layout_weight="1"
+            android:src="#00ffffff"/>
+
+        <ImageView
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:id="@+id/blankReturnBtn"
+            android:layout_weight="1"
+            android:src="#00ffffff"/>
+    </LinearLayout>
 
 
 </RelativeLayout>
