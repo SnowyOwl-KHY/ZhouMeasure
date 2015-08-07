@@ -11,28 +11,29 @@
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:id="@+id/nameInput"
-        android:layout_marginTop="40dp"
         android:hint="Name"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_above="@+id/imageView"
+        android:layout_toRightOf="@+id/fingerIcon"
+        android:layout_toEndOf="@+id/fingerIcon"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"/>
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/fingerIcon"
         android:src="@drawable/fingerprint_128"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_alignBottom="@+id/nameInput"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_marginTop="53dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2"/>
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imageView"
         android:src="@drawable/document2_128"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="45dp"
         android:layout_below="@+id/fingerIcon"
         android:layout_alignLeft="@+id/fingerIcon"
         android:layout_alignStart="@+id/fingerIcon"/>
@@ -43,26 +44,30 @@
         android:id="@+id/desInput"
         android:hint="Description"
         android:layout_alignTop="@+id/imageView"
-        android:layout_centerHorizontal="true"/>
+        android:layout_alignLeft="@+id/nameInput"
+        android:layout_alignStart="@+id/nameInput"/>
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imageView2"
         android:src="@drawable/rulers_128"
-        android:layout_marginTop="53dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="45dp"
         android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="45dp"/>
 
     <EditText
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:id="@+id/lengthInput"
         android:hint="Length"
-        android:layout_alignBottom="@+id/imageView2"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignLeft="@+id/desInput"
+        android:layout_alignStart="@+id/desInput"
+        android:inputType="number"/>
 
     <com.dd.CircularProgressButton
         android:id="@+id/submitAdd"
@@ -71,13 +76,22 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:cpb_textComplete="Complete"
-        app:cpb_textError="Error"
+        app:cpb_textError="I Know"
         app:cpb_textIdle="Submit"
+        android:layout_marginBottom="16dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="41dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="34dp"/>
+        android:layout_alignRight="@+id/lengthInput"
+        android:layout_alignEnd="@+id/lengthInput"/>
 
+    <com.romainpiel.shimmer.ShimmerTextView
+        android:id="@+id/infoText"
+        android:text="Please Input Name and Length"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:textColor="#444"
+        android:textSize="18dp"
+
+        android:layout_above="@+id/submitAdd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="71dp"/>
 </RelativeLayout>

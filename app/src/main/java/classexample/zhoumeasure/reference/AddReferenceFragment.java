@@ -6,17 +6,21 @@ import android.animation.ValueAnimator;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.dd.CircularProgressButton;
+import com.romainpiel.shimmer.Shimmer;
+import com.romainpiel.shimmer.ShimmerTextView;
+import com.romainpiel.shimmer.ShimmerViewHelper;
 
 import classexample.zhoumeasure.R;
+import classexample.zhoumeasure.UIAnimation;
 
 /**
  * Created by Xiaozhou on 2015/8/7.
@@ -24,37 +28,62 @@ import classexample.zhoumeasure.R;
 public class AddReferenceFragment extends Fragment {
 
     View rootView;
-    CircularProgressButton mSumbitBtn;
+    CircularProgressButton mSubmitBan;
     EditText mNameInput,mDesInput,mLengthInput;
+    ShimmerTextView mInfoText;
+    Shimmer mShimmer = new Shimmer();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.add_new_fragment_layout, container, false);
-        mSumbitBtn = (CircularProgressButton)rootView.findViewById(R.id.submitAdd);
+        mShimmer.setRepeatCount(1);
+        mSubmitBan = (CircularProgressButton)rootView.findViewById(R.id.submitAdd);
         mNameInput = (EditText)rootView.findViewById(R.id.nameInput);
         mDesInput = (EditText)rootView.findViewById(R.id.desInput);
         mLengthInput = (EditText)rootView.findViewById(R.id.lengthInput);
-        mSumbitBtn.setOnClickListener(new View.OnClickListener() {
+        mInfoText = (ShimmerTextView)rootView.findViewById(R.id.infoText);
+
+        mInfoText.setVisibility(View.INVISIBLE);
+        mSubmitBan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mSumbitBtn.getProgress() == 0) {
-                    if(canSumbit()) {
-                        simulateSuccessProgress(mSumbitBtn);
-                    }
-                    else
-                    {
-                        Toast.makeText(container.getContext(), "Confirm your input", Toast.LENGTH_SHORT);
-                        mSumbitBtn.setProgress(-1);
+                if (mSubmitBan.getProgress() == 0) {
+                    if (canSubmit()) {
+                        simulateSuccessProgress(mSubmitBan);
+                    } else {
+                        mInfoText.setVisibility(View.VISIBLE);
+                        mShimmer.start(mInfoText);
+                        mInfoText.startAnimation(UIAnimation.getInstance().getFadeIn(1000));
+                        //Toast.makeText(container.getContext(), "Confirm your input", Toast.LENGTH_SHORT);
+                        mSubmitBan.setProgress(-1);
                     }
                 } else {
-                    mSumbitBtn.setProgress(0);
+                    //mInfoText.setVisibility(View.INVISIBLE);
+                    mShimmer.cancel();
+                    mInfoText.startAnimation(UIAnimation.getInstance().getFadeOut(
+                            new Animation.AnimationListener() {
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                }
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    mInfoText.setVisibility(View.INVISIBLE);
+                                }
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+                                }
+                            }
+                    ));
+
+                    mSubmitBan.setProgress(0);
                 }
             }
         });
 
         return rootView;
     }
-    private boolean canSumbit()
+    private boolean canSubmit()
     {
         if(mLengthInput.getText().toString().equals("") ||
                 mNameInput.getText().toString().equals("")
