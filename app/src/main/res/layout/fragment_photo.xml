@@ -48,29 +48,32 @@
             android:textIsSelectable="false"
             android:textSize="20dp" />
 
-        <classexample.zhoumeasure.photo.LightButton
-            android:layout_width="@dimen/circle_size"
-            android:layout_height="@dimen/circle_size"
-            android:background="@null"
-            android:id="@+id/btnRuler"
-            android:src="@drawable/ruler_icon"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/btnPencil"
-            android:layout_toEndOf="@+id/btnPencil"
-            android:layout_marginLeft="10dp"/>
-
-        <classexample.zhoumeasure.photo.LightButton
-            android:layout_width="@dimen/circle_size"
-            android:layout_height="@dimen/circle_size"
-            android:background="@null"
-            android:id="@+id/btnPencil"
-            android:src="@drawable/pencil_icon"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="20dp"/>
-
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="@dimen/circle_size"
+        android:layout_height="@dimen/circle_size"
+        android:background="@null"
+        android:id="@+id/btnRuler"
+        android:src="@drawable/ruler_icon"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnPencil"
+        android:layout_toEndOf="@+id/btnPencil"
+        android:layout_marginLeft="10dp"/>
+
+    <ImageView
+        android:layout_width="@dimen/circle_size"
+        android:layout_height="@dimen/circle_size"
+        android:background="@null"
+        android:id="@+id/btnPencil"
+        android:src="@drawable/pencil_icon"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"/>
+
+
+
 
 
 </RelativeLayout>

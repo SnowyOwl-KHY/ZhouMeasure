@@ -1,6 +1,7 @@
 package classexample.zhoumeasure.camera;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -86,8 +87,14 @@ public class CameraFragment extends Fragment {
             parameters.setPictureFormat(PixelFormat.JPEG);
 			/* 照片质量 */
             parameters.set("jpeg-quality", 85);
+//            WindowManager wm = (WindowManager)getActivity().findViewById(R.id.RelLayout).getContext().getSystemService(Context.WINDOW_SERVICE);
+//            Display display = wm.getDefaultDisplay();
+//            int width = display.getWidth();  // deprecated
+//            int height = display.getHeight();
+//            parameters.setPictureSize(1024, 768);
 			/* 设置照片的大小：此处照片大小等于屏幕大小 */
             Display display = getActivity().getWindowManager().getDefaultDisplay();
+            Log.d("ly", "ddf"+display.getWidth()+" "+display.getHeight());
             parameters.setPictureSize(display.getWidth(), display.getHeight());
             camera.startPreview();
             /**

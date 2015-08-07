@@ -6,14 +6,18 @@ import org.opencv.core.Point;
  * Created by Rex on 2015/8/8.
  */
 public class Line {
-    Point[] x1;
-    Point[] x2;
+    public Point[] x1;
+    public Point[] x2;
     int count;
 
     public Line(int s) {
         count = s;
         x1 = new Point[s + 1];
         x2 = new Point[s + 1];
+    }
+
+    public int getCount(){
+        return count;
     }
 
     public void print() {

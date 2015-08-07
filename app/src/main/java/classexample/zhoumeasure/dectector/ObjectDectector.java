@@ -21,6 +21,15 @@ public class ObjectDectector {
     static double mindis = 1000;
     static int maxwidth,maxheight;
     Bitmap bmp;
+
+    static public int getWidth(){
+        return maxwidth;
+    }
+
+    static public int getHeight(){
+        return maxheight;
+    }
+
     static public boolean pd(double x, double y) {
         if (x < MAXMARGIN || y < MAXMARGIN) return true;
         if (maxwidth - x < MAXMARGIN || maxheight - y < MAXMARGIN) return true;
@@ -59,9 +68,9 @@ public class ObjectDectector {
         Imgproc.HoughLinesP(grayMat, lines, 1, Math.PI / 180, maxheight / 10, maxheight / 20, maxheight / 20);
         pd = new int[lines.cols()];
 
-        Canvas tempCanvas = new Canvas(bmp);
+//        Canvas tempCanvas = new Canvas(bmp);
         //tempBitmap = bmp;
-        tempCanvas.drawBitmap(bmp, 0, 0, null);
+   //     tempCanvas.drawBitmap(bmp, 0, 0, null);
         //System.out.println(lines.cols());
         count = 0;
         for (int x = 0; x < lines.cols(); x++) {

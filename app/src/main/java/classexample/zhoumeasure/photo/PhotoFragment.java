@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,8 +43,8 @@ public class PhotoFragment extends Fragment {
     float kDeltaTextDis = 75f;
 
     // UI Views
-//    ImageButton m_pencilBtn;
-//    ImageButton m_rulerBtn;
+    ImageView m_pencilBtn;
+    ImageView m_rulerBtn;
     RelativeLayout m_drawArea;
 
     public static PhotoFragment instance = null;
@@ -57,17 +58,29 @@ public class PhotoFragment extends Fragment {
         m_rootView = inflater.inflate(R.layout.fragment_photo, container, false);
         findViews();
 
-        // set background
+        m_pencilBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                m_line.setMode(1);
+            }
+        });
+
+        m_rulerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                m_line.setMode(2);
+                m_line.setBitmap(m_bitmap);
+            }
+        });
+
         m_drawArea = (RelativeLayout) m_rootView.findViewById(R.id.drawArea);
-//        Bitmap bitmapa = BitmapFactory.decodeResource(getResources(), R.drawable.laptop);
-//        setBitmap(CameraFragment.sendBM);
 
         // get width
         WindowManager wm = (WindowManager) m_drawArea.getContext().getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         int width = display.getWidth();  // deprecated
-
-        Log.d("ly", "" + width);
+        int height = display.getHeight();
+        Log.d("ly", "" + width+" "+height);
 
         m_line = new MyLine(m_drawArea.getContext());
         m_line.setPosition(width / 3);
@@ -131,8 +144,8 @@ public class PhotoFragment extends Fragment {
     private void findViews() {
         m_refLenView = (TextView) m_rootView.findViewById(R.id.refLen);
         m_tarLenView = (TextView) m_rootView.findViewById(R.id.tarLen);
-//        m_pencilBtn = (ImageButton)m_rootView.findViewById(R.id.pencilBtn);
-//        m_rulerBtn = (ImageButton)m_rootView.findViewById(R.id.rulerBtn);
+        m_pencilBtn = (ImageView)m_rootView.findViewById(R.id.btnPencil);
+        m_rulerBtn = (ImageView)m_rootView.findViewById(R.id.btnRuler);
     }
 
 }

@@ -1,13 +1,18 @@
 package classexample.zhoumeasure.photo;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+
+import classexample.zhoumeasure.dectector.Line;
+import classexample.zhoumeasure.dectector.ObjectDectector;
 
 /**
  * Created by liyan on 8/6/15.
@@ -16,6 +21,9 @@ public class MyLine extends View{
 
     MyAnchor[] m_anchor = new MyAnchor[4];
     Paint m_paint = new Paint();
+    int m_mode = 0;
+    Bitmap m_bitmap;
+    Line m_lines;
 
     public MyLine(Context context) {
 
@@ -73,6 +81,10 @@ public class MyLine extends View{
 
     }
 
+    public void setBitmap(Bitmap inBitmap){
+        m_bitmap = inBitmap;
+    }
+
     public double calPropotion(){
         double propotion = 0;
         double refDist = 0;
@@ -103,14 +115,50 @@ public class MyLine extends View{
             ((RelativeLayout)getParent()).addView(m_anchor[i]);
     }
 
+    public void setMode(int mode){
+        m_mode = mode;
+        this.invalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Log.d("zxz", " lineredraw");
-        m_paint.setARGB(255, 255, 0, 0);
-        canvas.drawLine(m_anchor[0].getX(), m_anchor[0].getY(), m_anchor[1].getX(), m_anchor[1].getY(), m_paint);
-        m_paint.setARGB(255, 0, 0, 255);
-        canvas.drawLine(m_anchor[2].getX(), m_anchor[2].getY(), m_anchor[3].getX(), m_anchor[3].getY(), m_paint);
+        if(m_mode == 0){
+            Log.d("ly", "deep dark fantasy0");
+            for(int i=0; i<4; i++){
+                m_anchor[i].setVisibility(View.GONE);
+            }
+            PhotoFragment.instance.m_refLenView.setVisibility(View.GONE);
+            PhotoFragment.instance.m_tarLenView.setVisibility(View.GONE);
+        }
+        else if(m_mode == 1) {
+            Log.d("ly", "deep dark fantasy1");
+            for(int i=0; i<4; i++){
+                m_anchor[i].setVisibility(View.VISIBLE);
+            }
+            PhotoFragment.instance.m_refLenView.setVisibility(View.VISIBLE);
+            PhotoFragment.instance.m_tarLenView.setVisibility(View.VISIBLE);
+            m_paint.setARGB(255, 255, 0, 0);
+            canvas.drawLine(m_anchor[0].getX(), m_anchor[0].getY(), m_anchor[1].getX(), m_anchor[1].getY(), m_paint);
+            m_paint.setARGB(255, 0, 0, 255);
+            canvas.drawLine(m_anchor[2].getX(), m_anchor[2].getY(), m_anchor[3].getX(), m_anchor[3].getY(), m_paint);
+        }
+        else if(m_mode == 2){
+            m_paint.setColor(Color.RED);
+            Log.d("ly", "deep dark fantasy2");
+            for(int i=0; i<4; i++){
+                m_anchor[i].setVisibility(View.GONE);
+            }
+            PhotoFragment.instance.m_refLenView.setVisibility(View.GONE);
+            PhotoFragment.instance.m_tarLenView.setVisibility(View.GONE);
+            m_lines = ObjectDectector.getEdge(m_bitmap);
+            Log.d("ly", m_bitmap.getWidth() +" "+ m_bitmap.getHeight());
+            Log.d("ly", ObjectDectector.getWidth()+" "+ObjectDectector.getHeight());
+            for(int i=0; i<m_lines.getCount(); i++){
+                canvas.drawLine((float)m_lines.x1[i].x, (float)m_lines.x1[i].y, (float)m_lines.x2[i].x, (float)m_lines.x2[i].y, m_paint);
+            }
+        }
     }
 
 }
