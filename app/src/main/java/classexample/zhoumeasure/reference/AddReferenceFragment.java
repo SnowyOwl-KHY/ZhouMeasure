@@ -64,6 +64,10 @@ public class AddReferenceFragment extends Fragment {
             public void onClick(View v) {
                 if (mSubmitBan.getProgress() == 0) {
                     if (canSubmit()) {
+                        ((MainActivity) getActivity()).getReferenceFragment()
+                                .addReferenceObject(new ReferenceFragment.ReferenceObject(mNameInput.getText().toString(),
+                                        Float.valueOf(mLengthInput.getText().toString()),
+                                        mDesInput.getText().toString()));
                         simulateSuccessProgress(mSubmitBan);
                     } else {
                         mInfoText.setVisibility(View.VISIBLE);
