@@ -19,6 +19,10 @@ public class MainActivity extends Activity {
     private PhotoFragment photoFragment = new PhotoFragment();
     private AddReferenceFragment addReferenceFragment = new AddReferenceFragment();
 
+    public ReferenceFragment getReferenceFragment() {
+        return referenceFragment;
+    }
+
     public CameraFragment getCameraFragment() {
         return cameraFragment;
     }
