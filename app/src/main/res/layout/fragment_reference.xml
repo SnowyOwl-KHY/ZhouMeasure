@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/referenceFragment">
+
+    <RelativeLayout
+        android:id="@+id/cameraContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/referenceLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/reference_list_height"
+        android:background="@color/theme_default_primary">
+
+        <TextView
+            android:id="@+id/tvReferenceTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reference Object"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+
+        <ListView
+            android:id="@+id/lvReference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvReferenceTitle"></ListView>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnEndPosition"
+        android:layout_width="@dimen/big_circle_size"
+        android:layout_height="@dimen/big_circle_size"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnStartPosition"
+        android:layout_width="@dimen/big_circle_size"
+        android:layout_height="@dimen/big_circle_size"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/referenceLayout"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="-26dp"
+        android:visibility="invisible" />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/svContentList"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/referenceLayout"
+        android:background="@color/white">
+
+        <TableLayout
+            android:id="@+id/detailContainer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="1"
+            android:paddingTop="20dp">
+
+        </TableLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/ivCameraImage"
+        android:layout_width="@dimen/big_circle_size"
+        android:layout_height="@dimen/big_circle_size"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/referenceLayout"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="-35dp"
+        android:src="@drawable/camera_icon" />
+
+    <ImageView
+        android:id="@+id/ivBackImage"
+        android:layout_width="@dimen/circle_size"
+        android:layout_height="@dimen/circle_size"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/back_icon"
+        android:alpha="0.0"/>
+
+</RelativeLayout>
