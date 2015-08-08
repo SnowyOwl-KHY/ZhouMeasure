@@ -142,12 +142,12 @@ public class CameraFragment extends Fragment {
             // 在拍照的时候相机是被占用的,拍照之后需要重新预览
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(sendBM, sendBM.getWidth(), sendBM.getHeight(),true);
-            Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap , 0, 0, scaledBitmap .getWidth(), scaledBitmap .getHeight(), matrix, true);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(sendBM, sendBM.getWidth(), sendBM.getHeight(), true);
+//            Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap , 0, 0, scaledBitmap .getWidth(), scaledBitmap .getHeight(), matrix, true);
 
 
 
-            PhotoFragment.instance.setBitmap(rotatedBitmap);
+            PhotoFragment.instance.setBitmap(sendBM);
             camera.startPreview();
         }
     }
