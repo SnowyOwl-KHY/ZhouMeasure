@@ -76,7 +76,7 @@ public class AddReferenceFragment extends Fragment {
                         //Toast.makeText(container.getContext(), "Confirm your input", Toast.LENGTH_SHORT);
                         mSubmitBan.setProgress(-1);
                     }
-                } else {
+                } else if (mSubmitBan.getProgress() == -1) {
                     //mInfoText.setVisibility(View.INVISIBLE);
                     mShimmer.cancel();
                     mInfoText.startAnimation(UIAnimation.getInstance().getFadeOut(
@@ -98,12 +98,34 @@ public class AddReferenceFragment extends Fragment {
 
                     mSubmitBan.setProgress(0);
                 }
+                //click complete
+                else if(mSubmitBan.getProgress()==100)
+                {
+                    clearAllInput();
+                    mSubmitBan.setProgress(0);
+                }
             }
         });
-
         return rootView;
     }
 
+    public void reset()
+    {
+        if(mSubmitBan == null)
+        {
+            return;
+        }
+        else {
+            mSubmitBan.setProgress(0);
+            clearAllInput();
+        }
+    }
+    private void clearAllInput()
+    {
+        mNameInput.setText("");
+        mDesInput.setText("");
+        mLengthInput.setText("");
+    }
     private boolean canSubmit() {
         if (mLengthInput.getText().toString().equals("") ||
                 mNameInput.getText().toString().equals("")

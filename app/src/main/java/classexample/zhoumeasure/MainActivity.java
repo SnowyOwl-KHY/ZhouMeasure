@@ -94,6 +94,7 @@ public class MainActivity extends Activity {
         getFragmentManager().beginTransaction()
                 .show(addReferenceFragment)
                 .commit();
+        addReferenceFragment.reset();
         addReferenceFragment.slideIn();
     }
 
