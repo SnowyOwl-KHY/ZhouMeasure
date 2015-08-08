@@ -59,6 +59,10 @@ public class PhotoFragment extends Fragment {
 
         // set background
         m_drawArea = (RelativeLayout) m_rootView.findViewById(R.id.drawArea);
+        if (m_bitmap != null) {
+            Drawable m_tempDr = new BitmapDrawable(m_bitmap);
+            m_drawArea.setBackground(m_tempDr);
+        }
 
         // get width
         WindowManager wm = (WindowManager) m_drawArea.getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -72,20 +76,23 @@ public class PhotoFragment extends Fragment {
         m_drawArea.addView(m_line);
         m_line.addAnchors();
 
-
         mRulerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("zxz", "onClickRuler");
+                m_line.setMode(1);
             }
         });
 
         mCalcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("zxz", "onClickRuler");
+                m_line.setClear();
+                m_line.setMode(2);
+                m_line.setBitmap(m_bitmap);
             }
         });
+
+        setResult();
 
         return m_rootView;
     }
@@ -97,7 +104,6 @@ public class PhotoFragment extends Fragment {
     public void getCameraPosX(int []ans){
         mBlankCameraBtn.getLocationInWindow(ans);
     }
-
     public void setResult(){
 
         //first Angle
@@ -134,7 +140,6 @@ public class PhotoFragment extends Fragment {
         m_bitmap = inBitmap;
         Drawable m_tempDr = new BitmapDrawable(m_bitmap);
         m_drawArea.setBackground(m_tempDr);
-        setResult();
     }
 
     public void setRefLength(double inRefLength) {
