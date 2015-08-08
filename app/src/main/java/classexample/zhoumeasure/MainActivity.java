@@ -10,6 +10,7 @@ import classexample.zhoumeasure.camera.CameraFragment;
 import classexample.zhoumeasure.photo.PhotoFragment;
 import classexample.zhoumeasure.reference.AddReferenceFragment;
 import classexample.zhoumeasure.reference.ReferenceFragment;
+import classexample.zhoumeasure.starting.StartingFragment;
 
 
 public class MainActivity extends Activity {
@@ -18,6 +19,7 @@ public class MainActivity extends Activity {
     private CameraFragment cameraFragment = new CameraFragment();
     private PhotoFragment photoFragment = new PhotoFragment();
     private AddReferenceFragment addReferenceFragment = new AddReferenceFragment();
+    private StartingFragment startingFragment = new StartingFragment();
 
     public ReferenceFragment getReferenceFragment() {
         return referenceFragment;
@@ -42,6 +44,7 @@ public class MainActivity extends Activity {
                 .add(R.id.mainActivity, referenceFragment)
                 .add(R.id.mainActivity, addReferenceFragment)
                 .hide(addReferenceFragment)
+                .add(R.id.mainActivity, startingFragment)
                 .commit();
     }
 
