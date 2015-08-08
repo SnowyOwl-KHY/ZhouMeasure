@@ -54,6 +54,7 @@ public class PhotoFragment extends Fragment {
 
         instance = this;
 
+
         m_rootView = inflater.inflate(R.layout.fragment_photo, container, false);
         findViews();
 
@@ -79,16 +80,25 @@ public class PhotoFragment extends Fragment {
         mRulerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                m_line.setMode(1);
+                v.animate().rotationBy(360).setDuration(400);
+                if(m_line.m_mode == 1) {
+                    m_line.setMode(0);
+                }
+                else if (m_line.m_mode == 0)
+                {
+                    m_line.setMode(1);
+                }
             }
         });
 
         mCalcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                m_line.setClear();
-                m_line.setMode(2);
-                m_line.setBitmap(m_bitmap);
+                v.animate().rotationBy(360).setDuration(400);
+                // openCV doesn't work
+                //m_line.setClear();
+                //m_line.setMode(2);
+                //m_line.setBitmap(m_bitmap);
             }
         });
 
@@ -140,6 +150,7 @@ public class PhotoFragment extends Fragment {
         m_bitmap = inBitmap;
         Drawable m_tempDr = new BitmapDrawable(m_bitmap);
         m_drawArea.setBackground(m_tempDr);
+        setResult();
     }
 
     public void setRefLength(double inRefLength) {

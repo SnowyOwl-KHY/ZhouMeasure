@@ -146,7 +146,7 @@ public class MyLine extends View{
     {
         int margin = 60;
         for(int i=0; i<4; i++)
-            m_anchor[i].setPosition(margin + (d-margin*2/3) * i, 100);
+            m_anchor[i].setPosition(margin + (d-margin*2/3) * i, 150);
     }
 
     private void lineRedraw() {
