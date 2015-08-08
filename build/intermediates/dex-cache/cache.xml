@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="C:\Users\Rex\ZhouMeasure\app\build\intermediates\exploded-aar\com.romainpiel.shimmer\library\1.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="605019d3e4be636f5dd74c83d05198994e3a2ce9">
+        <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\classes-f28eb7e2fcadbdc743da657375440eb2fbd0f063.jar" />
+    </item>
+    <item
         jar="C:\Users\Rex\ZhouMeasure\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -9,11 +16,11 @@
         <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-4372cf8b8a16d714c0457bc39f0e664b9341c043.jar" />
     </item>
     <item
-        jar="C:\Users\Rex\ZhouMeasure\app\build\intermediates\exploded-aar\ZhouMeasure\openCVLibrary300\unspecified\jars\classes.jar"
+        jar="C:\Users\Rex\ZhouMeasure\app\build\intermediates\exploded-aar\com.pnikosis\materialish-progress\1.5\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="d3aee91bcbb2d133283f6c33c79384199f1aa468">
-        <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\classes-8ca52aad9cb89f68a98753b353ec6b59f4f50bcf.jar" />
+        sha1="75c54c470e19b251749e6e6c2cf3d73c0b50aa64">
+        <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\classes-2f37eaac0b00098365cfceeb1dd66c5aefd8286a.jar" />
     </item>
     <item
         jar="C:\Users\Rex\ZhouMeasure\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
@@ -23,6 +30,27 @@
         <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\classes-2ef22819c8561aff03927d8dec1c0db2efb41db5.jar" />
     </item>
     <item
+        jar="G:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-b56006890b150d58d214d773d8e6c862f76ef086.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rex\ZhouMeasure\app\build\intermediates\exploded-aar\info.hoang8f\fbutton\1.0.5\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="2c12397a785c3b1868fbebeffc9553457b27803f">
+        <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\classes-3daa97bf93c53a533a9f229d4a7a0b04c122f092.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rex\ZhouMeasure\app\build\intermediates\exploded-aar\com.github.dmytrodanylyk.circular-progress-button\library\1.1.3\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8a6ed980c74ad35b2dfc4e1daf97bfc0eea5d7c9">
+        <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\classes-820fc2ede46923cb29d7d261481544e51d7adbdd.jar" />
+    </item>
+    <item
         jar="C:\Users\Rex\ZhouMeasure\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -30,11 +58,11 @@
         <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\classes-eb2225d5305e9ee4419d4d7c80863388747af33d.jar" />
     </item>
     <item
-        jar="G:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jar="C:\Users\Rex\ZhouMeasure\app\build\intermediates\exploded-aar\ZhouMeasure\openCVLibrary300\unspecified\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-b56006890b150d58d214d773d8e6c862f76ef086.jar" />
+        sha1="d3aee91bcbb2d133283f6c33c79384199f1aa468">
+        <dex dex="C:\Users\Rex\ZhouMeasure\app\build\intermediates\pre-dexed\debug\classes-8ca52aad9cb89f68a98753b353ec6b59f4f50bcf.jar" />
     </item>
 
 </items>

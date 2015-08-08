@@ -42,15 +42,10 @@ public class PhotoFragment extends Fragment {
     Bitmap m_bitmap = null;
     float kDeltaTextDis = 75f;
     // UI Views
-    ImageView m_pencilBtn;
-    ImageView m_rulerBtn;
     ImageView mCalcBtn;
     ImageView mRulerBtn;
 
     RelativeLayout m_drawArea;
-
-    private ImageView mBlankCameraBtn;
-    private ImageView mBlankReturnBtn;
 
     public static PhotoFragment instance = null;
 
@@ -62,22 +57,6 @@ public class PhotoFragment extends Fragment {
 
         m_rootView = inflater.inflate(R.layout.fragment_photo, container, false);
         findViews();
-
-        m_pencilBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                m_line.setMode(1);
-            }
-        });
-
-        m_rulerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                m_line.setClear();
-                m_line.setMode(2);
-                m_line.setBitmap(m_bitmap);
-            }
-        });
 
         m_drawArea = (RelativeLayout) m_rootView.findViewById(R.id.drawArea);
 
@@ -97,15 +76,18 @@ public class PhotoFragment extends Fragment {
         mRulerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("zxz", "onClickRuler");
+                m_line.setMode(1);
             }
         });
         mCalcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("zxz", "onClickRuler");
+                m_line.setClear();
+                m_line.setMode(2);
+                m_line.setBitmap(m_bitmap);
             }
         });
+
         setResult();
 
         return m_rootView;
@@ -115,9 +97,7 @@ public class PhotoFragment extends Fragment {
     public void onStart() {
         super.onStart();
     }
-    public void getCameraPosX(int []ans){
-        mBlankCameraBtn.getLocationInWindow(ans);
-    }
+
     public void setResult(){
 
         //first Angle
@@ -165,12 +145,8 @@ public class PhotoFragment extends Fragment {
     private void findViews() {
         m_refLenView = (TextView) m_rootView.findViewById(R.id.refLen);
         m_tarLenView = (TextView) m_rootView.findViewById(R.id.tarLen);
-        m_pencilBtn = (ImageView)m_rootView.findViewById(R.id.btnPencil);
-        m_rulerBtn = (ImageView)m_rootView.findViewById(R.id.btnRuler);
         mRulerBtn = (ImageView) m_rootView.findViewById(R.id.btnRuler);
         mCalcBtn = (ImageView) m_rootView.findViewById(R.id.btnCalc);
-        mBlankCameraBtn = (ImageView) m_rootView.findViewById(R.id.blankCameraBtn);
-        mBlankReturnBtn = (ImageView) m_rootView.findViewById(R.id.blankReturnBtn);
     }
 
 }

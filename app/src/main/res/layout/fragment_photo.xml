@@ -14,16 +14,13 @@
         android:layout_alignParentBottom="true">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="100dp"
+            android:layout_width="550dp"
+            android:layout_height="66dp"
             android:id="@+id/bottomBar"
+            android:src="#028ff5"
             android:layout_alignParentBottom="true"
-            android:src="@color/theme_default_primary_dark"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/btnRuler"/>
+            android:layout_alignRight="@+id/tarLen"
+            android:layout_alignEnd="@+id/tarLen"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,9 +29,10 @@
             android:id="@+id/refLen"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textColor="#ffff0000"
+            android:textColor="#97cb00"
             android:textSize="20dp"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,36 +42,61 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:textColor="#ff0000ff"
+            android:textColor="#028ff5"
             android:textIsSelectable="false"
             android:textSize="20dp" />
 
     </RelativeLayout>
 
-    <ImageView
-        android:layout_width="@dimen/circle_size"
-        android:layout_height="@dimen/circle_size"
-        android:background="@null"
-        android:id="@+id/btnRuler"
-        android:src="@drawable/ruler_icon"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnPencil"
-        android:layout_toEndOf="@+id/btnPencil"
-        android:layout_marginLeft="10dp"/>
-
-    <ImageView
-        android:layout_width="@dimen/circle_size"
-        android:layout_height="@dimen/circle_size"
-        android:background="@null"
-        android:id="@+id/btnPencil"
-        android:src="@drawable/pencil_icon"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:id="@+id/toolsContainer"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"/>
+        android:layout_alignParentStart="true">
 
+        <ImageView
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:id="@+id/btnRuler"
+            android:layout_weight="1"
+            android:src="@drawable/ruler"
+            android:layout_alignTop="@+id/bottomBar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="5dp"/>
 
+        <ImageView
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:id="@+id/btnCalc"
+            android:layout_weight="1"
+            android:src="@drawable/calculator"
+            android:layout_alignTop="@+id/bottomBar"
+            android:layout_toRightOf="@+id/btnRuler"
+            android:layout_toEndOf="@+id/btnRuler"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="0dp"/>
 
+        <ImageView
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:id="@+id/blankCameraBtn"
+            android:layout_weight="1"
+            android:src="#00ffffff"
+            android:layout_marginTop="5dp"/>
+
+        <ImageView
+            android:layout_width="@dimen/circle_size"
+            android:layout_height="@dimen/circle_size"
+            android:id="@+id/blankReturnBtn"
+            android:layout_weight="1"
+            android:src="#00ffffff"
+            android:layout_marginTop="5dp"/>
+    </LinearLayout>
 
 
 </RelativeLayout>
