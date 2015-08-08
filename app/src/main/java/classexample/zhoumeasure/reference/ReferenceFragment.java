@@ -238,12 +238,14 @@ public class ReferenceFragment extends Fragment {
     static class ReferenceObject {
         String name;
         float length;
-        String description;
+        String description = "Description about this object.";
 
         public ReferenceObject(String name, float length, String description) {
             this.name = name;
             this.length = length;
-            this.description = description;
+            if (description != null) {
+                this.description = description;
+            }
         }
 
         public ReferenceObject(String string) {
