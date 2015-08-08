@@ -34,6 +34,7 @@ import classexample.zhoumeasure.R;
  */
 public class PhotoFragment extends Fragment {
 
+    public static PhotoFragment instance = null;
     View m_rootView;
     double m_refLength = 15, m_tarLength = 0;
     TextView m_refLenView, m_tarLenView;
@@ -43,13 +44,9 @@ public class PhotoFragment extends Fragment {
     // UI Views
     ImageView mCalcBtn;
     ImageView mRulerBtn;
-
     RelativeLayout m_drawArea;
-
     private ImageView mBlankCameraBtn;
     private ImageView mBlankReturnBtn;
-
-    public static PhotoFragment instance = null;
 
     @Nullable
     @Override
@@ -79,19 +76,22 @@ public class PhotoFragment extends Fragment {
         m_drawArea.addView(m_line);
         m_line.addAnchors();
 
-
         mRulerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("zxz", "onClickRuler");
+                m_line.setMode(1);
             }
         });
+
         mCalcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("zxz", "onClickRuler");
+                m_line.setClear();
+                m_line.setMode(2);
+                m_line.setBitmap(m_bitmap);
             }
         });
+
         setResult();
 
         return m_rootView;
@@ -138,6 +138,8 @@ public class PhotoFragment extends Fragment {
 
     public void setBitmap(Bitmap inBitmap) {
         m_bitmap = inBitmap;
+        Drawable m_tempDr = new BitmapDrawable(m_bitmap);
+        m_drawArea.setBackground(m_tempDr);
     }
 
     public void setRefLength(double inRefLength) {

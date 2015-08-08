@@ -18,17 +18,23 @@ import android.widget.ImageView;
  */
 public class MyAnchor extends View {
 
+    final float kRadiusDiv = 0.5f;
     Bitmap m_img;
     Paint m_paint = new Paint();
     float m_radius = 20f, m_x, m_y;
     boolean m_isDown = false;
-    final float kRadiusDiv = 0.5f;
+
     public MyAnchor(Context context) {
         super(context);
         m_paint.setARGB(255, 0, 150, 180);
         m_paint.setStyle(Paint.Style.FILL);
         m_x = 100f;
         //setPosition(getRootView().getWidth() / 2, getRootView().getHeight() / 2);
+    }
+
+    public void setTransparent(){
+        m_paint.setAlpha(0);
+        this.invalidate();
     }
 
     public void setColor(int a, int r, int g, int b){
