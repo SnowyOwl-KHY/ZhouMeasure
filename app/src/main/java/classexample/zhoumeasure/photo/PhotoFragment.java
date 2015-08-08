@@ -41,11 +41,16 @@ public class PhotoFragment extends Fragment {
     MyLine m_line;
     Bitmap m_bitmap = null;
     float kDeltaTextDis = 75f;
-
     // UI Views
     ImageView m_pencilBtn;
     ImageView m_rulerBtn;
+    ImageView mCalcBtn;
+    ImageView mRulerBtn;
+
     RelativeLayout m_drawArea;
+
+    private ImageView mBlankCameraBtn;
+    private ImageView mBlankReturnBtn;
 
     public static PhotoFragment instance = null;
 
@@ -88,6 +93,19 @@ public class PhotoFragment extends Fragment {
         m_drawArea.addView(m_line);
         m_line.addAnchors();
 
+
+        mRulerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("zxz", "onClickRuler");
+            }
+        });
+        mCalcBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("zxz", "onClickRuler");
+            }
+        });
         setResult();
 
         return m_rootView;
@@ -97,7 +115,9 @@ public class PhotoFragment extends Fragment {
     public void onStart() {
         super.onStart();
     }
-
+    public void getCameraPosX(int []ans){
+        mBlankCameraBtn.getLocationInWindow(ans);
+    }
     public void setResult(){
 
         //first Angle
@@ -147,6 +167,10 @@ public class PhotoFragment extends Fragment {
         m_tarLenView = (TextView) m_rootView.findViewById(R.id.tarLen);
         m_pencilBtn = (ImageView)m_rootView.findViewById(R.id.btnPencil);
         m_rulerBtn = (ImageView)m_rootView.findViewById(R.id.btnRuler);
+        mRulerBtn = (ImageView) m_rootView.findViewById(R.id.btnRuler);
+        mCalcBtn = (ImageView) m_rootView.findViewById(R.id.btnCalc);
+        mBlankCameraBtn = (ImageView) m_rootView.findViewById(R.id.blankCameraBtn);
+        mBlankReturnBtn = (ImageView) m_rootView.findViewById(R.id.blankReturnBtn);
     }
 
 }

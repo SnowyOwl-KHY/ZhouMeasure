@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +22,13 @@ import java.util.HashMap;
 
 import classexample.zhoumeasure.MainActivity;
 import classexample.zhoumeasure.R;
+import classexample.zhoumeasure.photo.PhotoFragment;
 
 /**
  * Created by Xiaozhou on 2015/8/7.
  */
 public class ReferenceFragment extends Fragment {
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reference, container, false);
@@ -40,11 +39,13 @@ public class ReferenceFragment extends Fragment {
     private static final String DATA_KEY = "referenceObjectListDataKey";
     private static final String SEPARATOR = "@@";
 
-    private Button mBtnStartButton;
-    private Button mBtnEndButton;
+    private Button mBtnPositionAtReference;
+    private Button mBtnPositionAtCamera;
 
     private ImageView mIvCameraImage;
-    private ImageView mIvBackImage;
+    public ImageView mIvBackImage;
+
+    private ImageView mIvAddReference;
 
     private View mReferenceLayout;
     private ListView mLvReference;
@@ -62,13 +63,21 @@ public class ReferenceFragment extends Fragment {
 
     private void initialUIElement() {
 
-        mBtnStartButton = (Button) getActivity().findViewById(R.id.btnStartPosition);
-        mBtnEndButton = (Button) getActivity().findViewById(R.id.btnEndPosition);
+        mBtnPositionAtReference = (Button) getActivity().findViewById(R.id.btnCameraPositionAtReferenceFragment);
+        mBtnPositionAtCamera = (Button) getActivity().findViewById(R.id.btnCameraPositionAtCameraFragment);
 
         mIvCameraImage = (ImageView) getActivity().findViewById(R.id.ivCameraImage);
         mIvCameraImage.setOnClickListener(onClickListener);
         mIvBackImage = (ImageView) getActivity().findViewById(R.id.ivBackImage);
         mIvBackImage.setOnClickListener(onClickListener);
+
+        mIvAddReference = (ImageView) getActivity().findViewById(R.id.ivAddReference);
+        mIvAddReference.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).jumpToAddFragment();
+            }
+        });
 
         mReferenceLayout = getActivity().findViewById(R.id.referenceLayout);
 
@@ -227,12 +236,14 @@ public class ReferenceFragment extends Fragment {
     static class ReferenceObject {
         String name;
         float length;
-        String description;
+        String description = "Description about this object.";
 
         public ReferenceObject(String name, float length, String description) {
             this.name = name;
             this.length = length;
-            this.description = description;
+            if (description != null && !description.equals("")) {
+                this.description = description;
+            }
         }
 
         public ReferenceObject(String string) {
@@ -259,14 +270,29 @@ public class ReferenceFragment extends Fragment {
             float barGap = mReferenceLayout.getHeight();
             float bottomGap = mSvContentList.getHeight();
 
+            final int Y_DIFF = 15;
+            final int X_DIFF = (getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 4 - mIvCameraImage.getWidth()) / 2;
+
             switch (view.getId()) {
                 case R.id.ivCameraImage:
                     if (fragmentIsVisible) {
                         fragmentIsVisible = false;
-                        Utils.moveTo(view, mBtnEndButton.getX(), mBtnEndButton.getY());
+                        switch (attachedFragment) {
+                            case R.layout.fragment_camera:
+                                Utils.moveTo(view, mBtnPositionAtCamera.getX(), mBtnPositionAtCamera.getY());
+                                break;
+                            case R.layout.fragment_photo:
+                                Utils.moveTo(view,
+                                        getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 2 + X_DIFF,
+                                        getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - mIvCameraImage.getHeight() - Y_DIFF);
+                                break;
+                        }
                         Utils.slideUp(mReferenceLayout, barGap);
                         Utils.slideUp(mSvContentList, -bottomGap);
                         Utils.changeAlpha(mIvBackImage, APPEAR_ALPHA);
+                        Utils.moveTo(mIvAddReference, mIvAddReference.getX(), mIvAddReference.getY() - mIvAddReference.getHeight() - barGap);
+                        mIvBackImage.setX(getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 4 * 3 + X_DIFF);
+                        mIvBackImage.setY(getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - mIvBackImage.getHeight() - Y_DIFF);
                         ((MainActivity) getActivity()).getPhotoFragment().setRefLength(mSelectedLength);
                     } else {
                         switch (attachedFragment) {
@@ -274,9 +300,13 @@ public class ReferenceFragment extends Fragment {
                                 attachedFragment = R.layout.fragment_photo;
                                 ((MainActivity) getActivity()).getCameraFragment().takePhoto();
                                 ((MainActivity) getActivity()).jumpToPhotoFragment();
+                                Utils.moveTo(view,
+                                        getActivity().findViewById(R.id.referenceFragmentLayout).getWidth() / 2 + X_DIFF,
+                                        getActivity().findViewById(R.id.referenceFragmentLayout).getHeight() - mIvCameraImage.getHeight() - Y_DIFF);
                                 break;
                             case R.layout.fragment_photo:
                                 attachedFragment = R.layout.fragment_camera;
+                                Utils.moveTo(view, mBtnPositionAtCamera.getX(), mBtnPositionAtCamera.getY());
                                 ((MainActivity) getActivity()).jumpToCameraFragment();
                                 ((MainActivity) getActivity()).getPhotoFragment().setRefLength(mSelectedLength);
                                 break;
@@ -285,43 +315,14 @@ public class ReferenceFragment extends Fragment {
                     break;
                 case R.id.ivBackImage:
                     fragmentIsVisible = true;
-                    Utils.moveTo(mIvCameraImage, mBtnStartButton.getX(), mBtnStartButton.getY());
+                    Utils.moveTo(mIvCameraImage, mBtnPositionAtReference.getX(), mBtnPositionAtReference.getY());
                     Utils.slideDown(mReferenceLayout);
                     Utils.slideDown(mSvContentList);
                     Utils.changeAlpha(mIvBackImage, DISAPPEAR_ALPHA);
+                    Utils.moveTo(mIvAddReference, mIvAddReference.getX(), mIvAddReference.getY() + mIvAddReference.getHeight() + barGap);
                     break;
             }
         }
     };
-}
-
-class Utils {
-
-    static final int ANIMATION_TIME = 700;
-
-    public static void slideUp(View view, float delta) {
-        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
-                .translationY(-delta)
-                .setDuration(ANIMATION_TIME);
-    }
-
-    public static void slideDown(View view) {
-        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
-                .translationY(0)
-                .setDuration(ANIMATION_TIME);
-    }
-
-    public static void moveTo(View view, float aimX, float aimY) {
-        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
-                .x(aimX)
-                .y(aimY)
-                .setDuration(ANIMATION_TIME);
-    }
-
-    public static void changeAlpha(View view, float aimAlpha) {
-        view.animate().setInterpolator(new AccelerateDecelerateInterpolator())
-                .alpha(aimAlpha)
-                .setDuration(ANIMATION_TIME);
-    }
 }
 

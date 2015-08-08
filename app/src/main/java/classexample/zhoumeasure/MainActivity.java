@@ -16,6 +16,7 @@ import org.opencv.core.Scalar;
 
 import classexample.zhoumeasure.camera.CameraFragment;
 import classexample.zhoumeasure.photo.PhotoFragment;
+import classexample.zhoumeasure.reference.AddReferenceFragment;
 import classexample.zhoumeasure.reference.ReferenceFragment;
 
 
@@ -24,6 +25,11 @@ public class MainActivity extends Activity {
     private ReferenceFragment referenceFragment = new ReferenceFragment();
     private CameraFragment cameraFragment = new CameraFragment();
     private PhotoFragment photoFragment = new PhotoFragment();
+    private AddReferenceFragment addReferenceFragment = new AddReferenceFragment();
+
+    public ReferenceFragment getReferenceFragment() {
+        return referenceFragment;
+    }
 
     public CameraFragment getCameraFragment() {
         return cameraFragment;
@@ -74,9 +80,21 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         getFragmentManager().beginTransaction()
                 .add(R.id.mainActivity, photoFragment)
+                .hide(photoFragment)
                 .add(R.id.mainActivity, cameraFragment)
                 .add(R.id.mainActivity, referenceFragment)
+                .add(R.id.mainActivity, addReferenceFragment)
+                .hide(addReferenceFragment)
                 .commit();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        addReferenceFragment.setPosition(0, -5000);
+//        referenceFragment.mBtnPositionAtPhoto = photoFragment.mBlankCameraBtn;
+//        referenceFragment.mIvBackImage.setX(photoFragment.mBlankReturnBtn.getX());
+//        referenceFragment.mIvBackImage.setY(photoFragment.mBlankReturnBtn.getY());
     }
 
     @Override
@@ -102,11 +120,29 @@ public class MainActivity extends Activity {
     }
 
     public void jumpToPhotoFragment() {
-        getFragmentManager().beginTransaction().hide(cameraFragment).show(photoFragment).commit();
+        getFragmentManager().beginTransaction()
+                .hide(cameraFragment)
+                .show(photoFragment)
+                .commit();
     }
 
     public void jumpToCameraFragment() {
-        getFragmentManager().beginTransaction().hide(photoFragment).show(cameraFragment).commit();
+        getFragmentManager().beginTransaction()
+                .hide(photoFragment)
+                .show(cameraFragment)
+                .commit();
+    }
+
+    public void jumpToAddFragment() {
+        getFragmentManager().beginTransaction()
+                .show(addReferenceFragment)
+                .commit();
+        addReferenceFragment.reset();
+        addReferenceFragment.slideIn();
+    }
+
+    public void jumpOutFromAddFragment() {
+        addReferenceFragment.slideOut();
     }
 
 }

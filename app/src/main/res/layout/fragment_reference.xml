@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/referenceFragment">
+    android:id="@+id/referenceFragmentLayout">
 
     <RelativeLayout
         android:id="@+id/cameraContainer"
@@ -36,7 +36,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/btnEndPosition"
+        android:id="@+id/btnCameraPositionAtCameraFragment"
         android:layout_width="@dimen/big_circle_size"
         android:layout_height="@dimen/big_circle_size"
         android:layout_alignParentBottom="true"
@@ -45,7 +45,7 @@
         android:visibility="invisible" />
 
     <Button
-        android:id="@+id/btnStartPosition"
+        android:id="@+id/btnCameraPositionAtReferenceFragment"
         android:layout_width="@dimen/big_circle_size"
         android:layout_height="@dimen/big_circle_size"
         android:layout_alignParentEnd="true"
@@ -75,14 +75,25 @@
 
     <ImageView
         android:id="@+id/ivCameraImage"
-        android:layout_width="@dimen/big_circle_size"
-        android:layout_height="@dimen/big_circle_size"
+        android:layout_width="@dimen/circle_size"
+        android:layout_height="@dimen/circle_size"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/referenceLayout"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="-35dp"
-        android:src="@drawable/camera_icon" />
+        android:layout_marginTop="-28dp"
+        android:src="@drawable/camera" />
+
+    <ImageView
+        android:id="@+id/ivAddReference"
+        android:layout_width="@dimen/small_circle_size"
+        android:layout_height="@dimen/small_circle_size"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/referenceLayout"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="-18dp"
+        android:src="@drawable/add" />
 
     <ImageView
         android:id="@+id/ivBackImage"
@@ -90,7 +101,7 @@
         android:layout_height="@dimen/circle_size"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="5dp"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:src="@drawable/back_icon"
         android:alpha="0.0"/>
