@@ -68,6 +68,7 @@ public class PhotoFragment extends Fragment {
         m_rulerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                m_line.setClear();
                 m_line.setMode(2);
                 m_line.setBitmap(m_bitmap);
             }

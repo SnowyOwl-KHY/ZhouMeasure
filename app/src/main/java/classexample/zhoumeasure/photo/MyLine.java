@@ -24,6 +24,11 @@ public class MyLine extends View{
     int m_mode = 0;
     Bitmap m_bitmap;
     Line m_lines;
+    boolean isRefSelected = false;
+    boolean isTarSelected = false;
+    double m_refDist = 0;
+    double m_tarDist = 0;
+    final int selectD = 30;
 
     public MyLine(Context context) {
 
@@ -45,40 +50,74 @@ public class MyLine extends View{
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Log.d("zxz", String.valueOf(event.getX()) + ", " + String.valueOf(event.getY()));
-                switch (event.getAction() & MotionEvent.ACTION_MASK) {
-                    case MotionEvent.ACTION_DOWN:
-                        for(int i=0; i<4; i++)
-                        {
-                            if(m_anchor[i].onThisArea(event.getX(), event.getY()))
-                            {
-                                m_anchor[i].m_isDown = true;
-                                break;
+                if(m_mode == 1) {
+                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                        case MotionEvent.ACTION_DOWN:
+                            for (int i = 0; i < 4; i++) {
+                                if (m_anchor[i].onThisArea(event.getX(), event.getY())) {
+                                    m_anchor[i].m_isDown = true;
+                                    break;
+                                }
                             }
-                        }
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        Log.d("zxz", "Move!" + event.getX() + ", " + event.getY());
-                        for(int i=0; i<4; i++)
-                        {
-                            if(m_anchor[i].m_isDown)
-                            {
-                                m_anchor[i].setPosition(event.getX(), event.getY());
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            Log.d("zxz", "Move!" + event.getX() + ", " + event.getY());
+                            for (int i = 0; i < 4; i++) {
+                                if (m_anchor[i].m_isDown) {
+                                    m_anchor[i].setPosition(event.getX(), event.getY());
+                                }
                             }
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        for(int i=0; i<4; i++)
-                        {
-                            m_anchor[i].m_isDown = false;
-                        }
-                        break;
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            for (int i = 0; i < 4; i++) {
+                                m_anchor[i].m_isDown = false;
+                            }
+                            break;
+                    }
+                    lineRedraw();
+                    PhotoFragment.instance.setResult();
                 }
-                lineRedraw();
-                PhotoFragment.instance.setResult();
+                else if(m_mode == 2){
+                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                        case MotionEvent.ACTION_DOWN:
+                            for (int i = 0; i < m_lines.getCount(); i++) {
+                                if(event.getX() < (m_lines.x1[i].x + m_lines.x2[i].x)/2+selectD &&
+                                        event.getY() < (m_lines.x1[i].y + m_lines.x2[i].y)/2+selectD &&
+                                        event.getX() > (m_lines.x1[i].x + m_lines.x2[i].x)/2-selectD &&
+                                        event.getY() < (m_lines.x1[i].y + m_lines.x2[i].y)/2+selectD ) {
+                                    if (!isRefSelected && !isTarSelected) {
+                                        isRefSelected = true;
+                                        m_refDist = Math.sqrt((m_lines.x1[i].x - m_lines.x2[i].x) * (m_lines.x1[i].x - m_lines.x2[i].x) +
+                                                                (m_lines.x1[i].y - m_lines.x2[i].y) * (m_lines.x1[i].y - m_lines.x2[i].y));
+                                        PhotoFragment.instance.m_refLenView.setVisibility(View.VISIBLE);
+                                        break;
+                                    }
+                                    else if(!isTarSelected && isRefSelected){
+                                        isTarSelected = true;
+                                        m_tarDist = Math.sqrt((m_lines.x1[i].x - m_lines.x2[i].x) * (m_lines.x1[i].x - m_lines.x2[i].x) +
+                                                (m_lines.x1[i].y - m_lines.x2[i].y) * (m_lines.x1[i].y - m_lines.x2[i].y));
+                                        PhotoFragment.instance.m_tarLenView.setVisibility(View.VISIBLE);
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                }
                 return true;
             }
         });
 
+    }
+
+    public void setClear()
+    {
+        isTarSelected = false;
+        isRefSelected = false;
+        m_refDist = 0;
+        m_tarDist = 0;
+        PhotoFragment.instance.m_tarLenView.setVisibility(View.GONE);
+        PhotoFragment.instance.m_refLenView.setVisibility(View.GONE);
     }
 
     public void setBitmap(Bitmap inBitmap){
@@ -96,6 +135,10 @@ public class MyLine extends View{
                 (m_anchor[3].getY() - m_anchor[2].getY()) * (m_anchor[3].getY() - m_anchor[2].getY()) +
                         (m_anchor[3].getX() - m_anchor[2].getX()) * (m_anchor[3].getX() - m_anchor[2].getX()) );
         propotion = tarDist/refDist;
+        if(m_mode == 2)
+        {
+            return m_tarDist/m_refDist;
+        }
         return propotion;
     }
 
@@ -153,7 +196,7 @@ public class MyLine extends View{
             PhotoFragment.instance.m_refLenView.setVisibility(View.GONE);
             PhotoFragment.instance.m_tarLenView.setVisibility(View.GONE);
             m_lines = ObjectDectector.getEdge(m_bitmap);
-            Log.d("ly", m_bitmap.getWidth() +" "+ m_bitmap.getHeight());
+            Log.d("ly", m_bitmap.getWidth() + " " + m_bitmap.getHeight());
             Log.d("ly", ObjectDectector.getWidth()+" "+ObjectDectector.getHeight());
             for(int i=0; i<m_lines.getCount(); i++){
                 canvas.drawLine((float)m_lines.x1[i].x, (float)m_lines.x1[i].y, (float)m_lines.x2[i].x, (float)m_lines.x2[i].y, m_paint);
