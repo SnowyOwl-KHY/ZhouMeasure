@@ -243,7 +243,7 @@ public class ReferenceFragment extends Fragment {
         public ReferenceObject(String name, float length, String description) {
             this.name = name;
             this.length = length;
-            if (description != null) {
+            if (description != null && !description.equals("")) {
                 this.description = description;
             }
         }
