@@ -2,8 +2,12 @@ package classexample.zhoumeasure.camera;
 
 import android.app.Fragment;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.hardware.camera2.*;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -22,6 +26,7 @@ import java.io.IOException;
 
 import classexample.zhoumeasure.MainActivity;
 import classexample.zhoumeasure.R;
+import classexample.zhoumeasure.photo.PhotoFragment;
 
 /**
  * Created by Xiaozhou on 2015/8/7.
@@ -29,6 +34,7 @@ import classexample.zhoumeasure.R;
 public class CameraFragment extends Fragment {
 
     private static final String TAG = "CameraFragment";
+    static public Bitmap sendBM;
     private Camera camera;
     private boolean preview = false;
 
@@ -74,18 +80,21 @@ public class CameraFragment extends Fragment {
             }
 
             Camera.Parameters parameters = camera.getParameters();
-			/* 设置预览照片的大小，此处设置为全屏 */
-            parameters.setPreviewSize(200, 200);
+
 			/* 每秒从摄像头捕获5帧画面， */
-            parameters.setPreviewFrameRate(25);
+            //parameters.setPreviewFrameRate(25);
 			/* 设置照片的输出格式:jpg */
-            parameters.setPictureFormat(PixelFormat.JPEG);
+            //parameters.setPictureFormat(PixelFormat.JPEG);
 			/* 照片质量 */
-            parameters.set("jpeg-quality", 85);
+           // parameters.set("jpeg-quality", 85);
 			/* 设置照片的大小：此处照片大小等于屏幕大小 */
-            Display display = getActivity().getWindowManager().getDefaultDisplay();
-            parameters.setPictureSize(display.getWidth(), display.getHeight());
+            //Display display = getActivity().getWindowManager().getDefaultDisplay();
+            //parameters.setPictureSize(display.getWidth(), display.getHeight());
+			/* 设置预览照片的大小，此处设置为全屏 */
+            //parameters.setPreviewSize(display.getWidth(), display.getHeight());
+            camera.setParameters(parameters);
             camera.startPreview();
+            camera.setDisplayOrientation(90);
             /**
              * Installs a callback to be invoked for every preview frame in addition to displaying them on the screen.
              * The callback will be repeatedly called for as long as preview is active. This method can be called at
@@ -128,16 +137,17 @@ public class CameraFragment extends Fragment {
     private final class TakePictureCallback implements Camera.PictureCallback {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            File file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
-            Log.d(TAG, "@!!@#!!" + System.currentTimeMillis() + ".jpg");
-            FileOutputStream fos;
-            try {
-                fos = new FileOutputStream(file);
-                fos.write(data);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            sendBM = BitmapFactory.decodeByteArray(data, 0, data.length);
+
             // 在拍照的时候相机是被占用的,拍照之后需要重新预览
+            Matrix matrix = new Matrix();
+            matrix.postRotate(90);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(sendBM, sendBM.getWidth(), sendBM.getHeight(),true);
+            Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap , 0, 0, scaledBitmap .getWidth(), scaledBitmap .getHeight(), matrix, true);
+
+
+
+            PhotoFragment.instance.setBitmap(rotatedBitmap);
             camera.startPreview();
         }
     }

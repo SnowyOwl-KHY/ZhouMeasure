@@ -34,6 +34,7 @@ import classexample.zhoumeasure.R;
  */
 public class PhotoFragment extends Fragment {
 
+    public static PhotoFragment instance = null;
     View m_rootView;
     double m_refLength = 15, m_tarLength = 0;
     TextView m_refLenView, m_tarLenView;
@@ -43,13 +44,9 @@ public class PhotoFragment extends Fragment {
     // UI Views
     ImageView mCalcBtn;
     ImageView mRulerBtn;
-
     RelativeLayout m_drawArea;
-
     private ImageView mBlankCameraBtn;
     private ImageView mBlankReturnBtn;
-
-    public static PhotoFragment instance = null;
 
     @Nullable
     @Override
@@ -62,10 +59,6 @@ public class PhotoFragment extends Fragment {
 
         // set background
         m_drawArea = (RelativeLayout) m_rootView.findViewById(R.id.drawArea);
-        if (m_bitmap != null) {
-            Drawable m_tempDr = new BitmapDrawable(m_bitmap);
-            m_drawArea.setBackground(m_tempDr);
-        }
 
         // get width
         WindowManager wm = (WindowManager) m_drawArea.getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -86,13 +79,13 @@ public class PhotoFragment extends Fragment {
                 Log.d("zxz", "onClickRuler");
             }
         });
+
         mCalcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("zxz", "onClickRuler");
             }
         });
-        setResult();
 
         return m_rootView;
     }
@@ -104,6 +97,7 @@ public class PhotoFragment extends Fragment {
     public void getCameraPosX(int []ans){
         mBlankCameraBtn.getLocationInWindow(ans);
     }
+
     public void setResult(){
 
         //first Angle
@@ -138,6 +132,9 @@ public class PhotoFragment extends Fragment {
 
     public void setBitmap(Bitmap inBitmap) {
         m_bitmap = inBitmap;
+        Drawable m_tempDr = new BitmapDrawable(m_bitmap);
+        m_drawArea.setBackground(m_tempDr);
+        setResult();
     }
 
     public void setRefLength(double inRefLength) {
