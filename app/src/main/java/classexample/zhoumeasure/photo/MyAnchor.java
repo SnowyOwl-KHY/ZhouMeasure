@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package classexample.zhoumeasure.photo;
 
 import android.content.Context;
