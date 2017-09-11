@@ -1,5 +1,6 @@
 /**
- * 
+ * This is our first Android app. During that time, we can even hardly use github so that we use USB to do the version control.
+ * It is funny right? But it is also meaningful to us!
  */
 package classexample.zhoumeasure.photo;
 
